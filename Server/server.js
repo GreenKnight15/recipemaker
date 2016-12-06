@@ -13,7 +13,8 @@ var cors = require('cors');
  
 
 // Configuration
-mongoose.connect('mongodb://admin:Sherlock221@ds119618.mlab.com:19618/recipemaker');
+var connectionString = require('./connectionString');
+mongoose.connect( connectionString.connection);
  
 app.use(morgan('dev'));                                         // log every request to the console
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded

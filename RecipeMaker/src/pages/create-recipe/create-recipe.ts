@@ -21,7 +21,7 @@ import { YourRecipes } from '../your-recipes/your-recipes';
 @Injectable()
 export class CreateRecipe implements OnInit{
 
-    public recipeForm: FormGroup;
+    public recipeForm;
     public submitted: boolean;
     public events: any[] = [];
     private id = "5845109749ada014e89fde25";

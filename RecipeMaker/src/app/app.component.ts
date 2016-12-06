@@ -4,8 +4,12 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { Featured } from '../pages/featured/featured';
 import { Page2 } from '../pages/page2/page2';
+import { Profile } from '../pages/profile/profile';
+import { Login } from '../pages/login/login';
+
 import { CreateRecipe } from '../pages/create-recipe/create-recipe';
 import { YourRecipes } from '../pages/your-recipes/your-recipes';
+import {AuthService} from '../services/auth/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,19 +17,27 @@ import { YourRecipes } from '../pages/your-recipes/your-recipes';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Featured;
+  rootPage: any = Login;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform, private auth: AuthService) {
     this.initializeApp();
-
+     platform.ready().then(() => {
+          // Okay, so the platform is ready and our plugins are available.
+          // Here you can do any higher level native things you might need.
+          StatusBar.styleDefault();
+          // Schedule a token refresh on app start up
+          auth.startupTokenRefresh();
+        });
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Featured', component: Featured },
       { title: 'Create Recipe', component:CreateRecipe},
       { title: 'Your Recipes', component:YourRecipes},
-      { title: 'Page Two', component: Page2 }
+      { title: 'Page Two', component: Page2 },
+      { title: 'Profile', component: Profile }
+
     ];
 
   }

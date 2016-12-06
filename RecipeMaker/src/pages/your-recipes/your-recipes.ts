@@ -18,7 +18,7 @@ export class YourRecipes implements OnInit{
   constructor(public navCtrl: NavController,private recipeService: RecipeService) {}
 
   public id = "5845109749ada014e89fde25";    
-  private userRecipes; 
+  public userRecipes; 
     
   ionViewDidLoad() {
       
