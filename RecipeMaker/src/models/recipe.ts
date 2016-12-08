@@ -2,9 +2,16 @@ export class Recipe {
   constructor(
     public Id: any,
     public title: string,
-    public userId: any, 
+    public userId: String, 
     public description: string,
-    public reviews: Number[], 
+    public ingredients:String[],
+    public steps:String[],
+    public meal:Number[],
+    public category:Number[],
+    public imageUrl:String,
+    public reviews: String[],
+    public userImg: String,
+    public likes:String[],
     public dateCreated: Date
     ) { }
 }

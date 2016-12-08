@@ -6,6 +6,13 @@ import 'rxjs/add/operator/map';
 import { RecipeService } from '../../services/recipe-service';
 import { Recipe } from '../../models/recipe';
 import { YourRecipes } from '../your-recipes/your-recipes';
+import { Meal } from '../../models/meal';
+import { Meals } from '../../models/meals';
+import { Featured } from '../featured/featured';
+import { AuthService} from '../../services/auth/auth.service';
+import { Catagory } from '../../models/catagory';
+import { Catagories } from '../../models/catagories';
+import { User } from '../../models/user';
 
 /*
   Generated class for the CreateRecipe page.
@@ -26,25 +33,68 @@ export class CreateRecipe implements OnInit{
     public events: any[] = [];
     private id = "5845109749ada014e89fde25";
 
-  constructor(public navCtrl: NavController, private recipeService: RecipeService, private formBuilder: FormBuilder ) {}
+  constructor(public navCtrl: NavController, private recipeService: RecipeService, private formBuilder: FormBuilder,public auth: AuthService ) {}
+    
+    meals = Meals;
+    catagories = Catagories;
+    ingredients = [];
+    ingredientTxt;
+    stepTxt;
+    steps = [];
+    user:User;
     
     ngOnInit(){
-              this.recipeForm = new FormGroup({
+            this.user = this.auth.myUser;
+            this.recipeForm = new FormGroup({
             title: new FormControl('',[<any>Validators.required,<any>Validators.minLength(5)]),
-            description: new FormControl('',[<any>Validators.required,<any>Validators.minLength(5)])        });  
+            description: new FormControl('',[<any>Validators.required,<any>Validators.minLength(5)]),       
+            meal: new FormControl('',null),
+            category: new FormControl('',null)
+              });  
     }
     
+    addIngredient(text){
+        this.ingredients.push(text);
+        this.ingredientTxt = '';
+    }
+    deleteIngredient(item){
+        for(var i = 0; i < this.ingredients.length; i++) {
+            if(this.ingredients[i] == item){
+                this.ingredients.splice(i, 1);
+        }
+      }
+    }
+    
+    addStep(text){
+        this.steps.push(text);
+        this.stepTxt = '';
+    }
+    deleteStep(item){
+        for(var i = 0; i < this.steps.length; i++) {
+            if(this.steps[i] == item){
+                this.steps.splice(i, 1);
+            }
+      }
+    }
+    
+    cancel(){
+        this.navCtrl.setRoot(Featured);
+    }
   ionViewDidLoad() {
 
   }
 
     save(model: Recipe, isValid: boolean): void{
-      this.submitted = true;
-      model.userId = this.id;
+      model.ingredients = this.ingredients;
+      model.steps = this.steps;
+      model.userId = this.user.identities[0].user_id;
+      model.dateCreated = new Date();
+
       console.log(model);
-      console.log(model,isValid);
-      this.recipeService.createRecipe(model);
-      this.navCtrl.push(YourRecipes);
+      if(isValid){  
+        this.recipeService.createRecipe(model);
+        this.navCtrl.setRoot(YourRecipes);
+      }
   }
     
 }

@@ -17,15 +17,84 @@
 <ion-content padding>
 <div class="container">
     <form [formGroup]="recipeForm" novalidate (ngSubmit)="save(recipeForm.value, recipeForm.valid)">
-        <input type="text" formControlName="title">
-        <small [hidden]="recipeForm.controls.title.valid || (recipeForm.controls.title.pristine && !submitted)" >
-            Name is required (minimum 5 characters).
-        </small>
-        <input type="text" formControlName="description">
-        <small [hidden]="recipeForm.controls.description.valid || (recipeForm.controls.description.pristine && !submitted)" >
-            Description is required (minimum 5 characters).
-        </small>
-        <button type="submit">Save</button>
+        <ion-list>
+         <ion-item>
+            <ion-label floating>Recipe Name</ion-label>
+            <ion-textarea type="text" formControlName="title"></ion-textarea>
+            <ion-label floating color="danger" [hidden]="recipeForm.controls.title.valid || (recipeForm.controls.title.pristine && !submitted)" >
+                Name is required (minimum 5 characters).
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Recipe Description</ion-label>    
+            <ion-textarea right type="text" formControlName="description"></ion-textarea>
+            <ion-label floating color="danger" [hidden]="recipeForm.controls.description.valid || (recipeForm.controls.description.pristine && !submitted)" >
+                Description is required (minimum 5 characters).
+            </ion-label>
+        </ion-item>
+        <ion-item>      
+            <ion-label floating >Meal Time</ion-label>
+            <ion-select formControlName="meal" multiple="true">
+                <ion-option *ngFor="let item of meals" value="{{item.Id}}" >{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item >      
+            <ion-label floating >Categories</ion-label>
+            <ion-select formControlName="category" multiple="true">
+                <ion-option *ngFor="let item of catagories" value="{{item.Id}}" >{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+         <ion-item-divider color="light">Ingredients</ion-item-divider>
+          <ion-item >
+            <ion-list>
+                <ion-grid detail-push *ngFor="let item of ingredients">
+                <ion-row> 
+                    <ion-col width-90>
+                        {{item}}
+                    </ion-col>
+                    <ion-col width-10>
+                        <button ion-button small color="danger" type="button" (click)="deleteIngredient( item )"> Delete </button>
+                    </ion-col>
+                     </ion-row>
+                </ion-grid>  
+            </ion-list>
+        </ion-item>
+          <ion-grid>
+            <ion-row> 
+                <ion-col width-90>
+                    <ion-textarea inline right type="text" #ingredientTxt (ngModel)="ingredientTxt" value="{{ingredientTxt.value}}" placeholder="New Ingredient"></ion-textarea>                
+                </ion-col>
+                <ion-col width-10>
+                    <button ion-button  type="button" (click)="addIngredient(ingredientTxt.value); ingredientTxt.value=null" >Add</button>                 
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-item-divider color="light">Instruction Steps</ion-item-divider>
+        <ion-item>
+            <ion-list>
+              <ion-grid detail-push *ngFor="let item of steps">
+                <ion-row> 
+                    <ion-col width-90>
+                        {{item}}
+                    </ion-col>
+                <ion-col width-10>
+                    <button ion-button small color="danger" type="button" (click)="deleteStep( item )"> Delete </button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            </ion-list>
+        </ion-item>
+        <ion-grid>
+            <ion-row> 
+                <ion-col width-90>
+                    <ion-textarea inline right type="text" #stepTxt (ngModel)="stepTxt" value="{{stepTxt.value}}" placeholder="New Instruction"></ion-textarea>                </ion-col>
+                <ion-col width-10>
+                    <button ion-button type="button" (click)="addStep(stepTxt.value); stepTxt.value=null" >Add</button>                 </ion-col>
+            </ion-row>
+        </ion-grid>
+        <button ion-button primary type="submit">Save</button>
+        <button ion-button primary type="button" (click)="cancel()">Cancel</button>
+        </ion-list>
     </form>
 </div>
 </ion-content>

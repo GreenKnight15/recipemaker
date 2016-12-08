@@ -1,15 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
 import { Featured } from '../pages/featured/featured';
-import { Page2 } from '../pages/page2/page2';
+import { ExploreDetail } from '../pages/explore/explore-detail';
 import { Profile } from '../pages/profile/profile';
 import { Login } from '../pages/login/login';
+import { RecipeDetails } from '../pages/recipe-details/recipe-details';
+import { Explore } from '../pages/explore/explore';
+
 
 import { CreateRecipe } from '../pages/create-recipe/create-recipe';
 import { YourRecipes } from '../pages/your-recipes/your-recipes';
-import {AuthService} from '../services/auth/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,7 +19,7 @@ import {AuthService} from '../services/auth/auth.service';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Login;
+  rootPage: any = Featured;
 
   pages: Array<{title: string, component: any}>;
 
@@ -35,7 +37,7 @@ export class MyApp {
       { title: 'Featured', component: Featured },
       { title: 'Create Recipe', component:CreateRecipe},
       { title: 'Your Recipes', component:YourRecipes},
-      { title: 'Page Two', component: Page2 },
+      { title: 'Explore', component: Explore },
       { title: 'Profile', component: Profile }
 
     ];

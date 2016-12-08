@@ -5,11 +5,18 @@ var ObjectId = Schema.ObjectId;
 
 var Recipe = new Schema({
     Id: ObjectId,
-    userId: {type: String, ref: 'User' },
+    userId: String,
     title: String,
     description: String,
-    reviews: {type: mongoose.Schema.ObjectId, ref: 'Review' },
+    ingredients:[String],
+    steps:[String],
+    meal:[Number],
+    imageUrl:String,
+    reviews: [{type: String, ref: 'Review' }],
     dateCreated: Date,
+    likes:[String],
+    category:[Number],
+    userImg:String
 });
 
 

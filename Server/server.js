@@ -54,17 +54,45 @@ var Recipe = mongoose.model('Recipe');
 //        });
 // 
 //    });
+
  
-    // Get recipes
+    // Get recipes by user id
     app.get('/api/getRecipes/:id', function(req, res) {
         var id = req.param('id');
         console.log("fetching recipes for user: "+id);
         // use mongoose to get all reviews in the database
         Recipe.find(
             {
-                userId:id
+                userId:id,
             }
         )
+        .exec(function(err, recipes) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err){
+                res.send(err)
+                console.log(err);
+            }else{
+                res.json(recipes); // return all reviews in JSON format
+            }
+        });
+    });
+
+     
+    // Get recipes by catagory id
+    // Get recipes by user id
+    app.get('/api/category/:id/:page/:perPage', function(req, res) {
+        var id = req.param('id');
+        var page = parseInt(req.param('page'));
+        var perPage = parseInt(req.param('perPage'));
+        console.log("fetching recipes for user: " + id);
+        // use mongoose to get all reviews in the database
+        Recipe.find(
+            {
+                category: id,
+            }
+        )
+        .limit(perPage)
+        .skip(perPage * page)
         .exec(function(err, recipes) {
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err){
@@ -82,13 +110,20 @@ var Recipe = mongoose.model('Recipe');
         // create a recipe, information comes from request from Ionic
         var newRecipe = new Recipe({
             title : req.body.title,
-            description : req.body.description,
             userId:req.body.userId,
-        }).save(function(err, recipe) {
+            description : req.body.description,
+            ingredients:req.body.ingredients,
+            steps: req.body.steps,
+            meal:req.body.meal,
+            imageUrl: "",
+            dateCreated:req.body.dateCreated,
+            likes:req.body.likes,
+            category:req.body.category,
+            userImg:req.body.userImg
+        }).save(function(err, newRecipe) {
             if (err)
                 res.send(err);
         });
- 
     });
  
 //    // delete a review
@@ -100,6 +135,10 @@ var Recipe = mongoose.model('Recipe');
 //        });
 //    });
  
+
+    app.use(function (req, res, next) {
+      res.status(404).send('Sorry cant find that!')
+    }) 
  
 // listen (start app with node server.js) ======================================
 app.listen(8080);

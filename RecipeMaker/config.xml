@@ -32,4 +32,6 @@
   <param name="ios-package" value="CDVInAppBrowser" />
   <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
 </feature>
+<allow-navigation href="https://cdn.auth0.com/w2/auth0-7.4.min.js" />
+<allow-navigation href="https://cdn.auth0.com/js/lock/10.6/lock.min.js" />
 </widget>

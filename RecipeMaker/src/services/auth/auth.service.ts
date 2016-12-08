@@ -3,7 +3,7 @@ import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 //import { Auth0Vars } from '../../auth0-variables';
-
+import { User } from '../../models/user'
 // Avoid name not found warnings
 declare var Auth0: any;
 declare var Auth0Lock: any;
@@ -24,14 +24,17 @@ export class AuthService {
   storage: Storage = new Storage();
   refreshSubscription: any;
   user: Object;
+  myUser:User;
   zoneImpl: NgZone;
   idToken: string;
+  userPic:String;
   
   constructor(private authHttp: AuthHttp, zone: NgZone) {
     this.zoneImpl = zone;
     // Check if there is a profile saved in local storage
     this.storage.get('profile').then(profile => {
       this.user = JSON.parse(profile);
+      this.myUser = JSON.parse(profile);
     }).catch(error => {
       console.log(error);
     });
@@ -55,6 +58,8 @@ export class AuthService {
         profile.user_metadata = profile.user_metadata || {};
         this.storage.set('profile', JSON.stringify(profile));
         this.user = profile;
+        this.myUser = profile;
+        this.userPic = profile.user.picture;
       });
 
       this.lock.hide();
@@ -62,8 +67,7 @@ export class AuthService {
       this.storage.set('refresh_token', authResult.refreshToken);
       this.zoneImpl.run(() => this.user = authResult.profile);
       // Schedule a token refresh
-      this.scheduleRefresh();
-
+      this.scheduleRefresh(); 
     });    
   }
 

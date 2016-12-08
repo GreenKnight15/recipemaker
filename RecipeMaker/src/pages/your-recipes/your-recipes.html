@@ -11,25 +11,39 @@
     </button>
     <ion-title>Your Recipes</ion-title>
   </ion-navbar>
-</ion-header>>
+</ion-header>
 
 
 <ion-content padding>
     <ion-list>
       <ion-item-sliding *ngFor="let item of userRecipes">
         <ion-item>
-          <h2>{{item.title}}</h2>
+            <ion-list>
+                <button  ion-item (click)="recipeSelected(item)">
+                    <h1>{{item.title}}</h1>
+                    <h2>{{item.description}}</h2>
+                </button>
+            </ion-list>
+              <ion-row>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>{{item.likes.length}} Likes</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div>{{item.reviews.length}} Reviews</div>
+                  </button>
+                </ion-col>
+                <ion-col center text-center>
+                  <ion-note>
+                    {{item.dateCreated }}
+                  </ion-note>
+                </ion-col>
+            </ion-row>
         </ion-item>
-        <ion-item-options side="left">
-          <button ion-button color="primary">
-            <ion-icon name="text"></ion-icon>
-            Text
-          </button>
-          <button ion-button color="secondary">
-            <ion-icon name="call"></ion-icon>
-            Call
-          </button>
-        </ion-item-options>
         <ion-item-options side="right">
           <button ion-button color="primary">
             <ion-icon name="mail"></ion-icon>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar  class="bar-positive" align-title="center">
+    <ion-buttons start>
+        <button ion-button (click)='dismiss()'>
+            Close
+        </button>
+    </ion-buttons>
+    <ion-title right >{{recipe.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding >
+    <img href=" recipe.imageUrl " />
+    <h1>{{recipe.description}}</h1>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-item-divider color="light">Ingredients</ion-item-divider>
+                <ion-list>
+                    <ion-item *ngFor="let in of recipe.ingredients">
+                        <h3>{{in}}</h3>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+            <ion-col>
+                <ion-item-divider color="light">Instruction Steps</ion-item-divider>
+                <ion-list>
+                    <ion-item *ngFor="let step of recipe.steps ; let i = index" >
+                        <h3>{{i+1}}. {{step}}</h3>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+</ion-content>
