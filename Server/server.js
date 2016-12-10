@@ -54,10 +54,39 @@ var Recipe = mongoose.model('Recipe');
 //        });
 // 
 //    });
+    app.post('/api/user',function(req,res){
+        var query = {'user_id':req.body.user_id};  
+        var upsertUser = req.body;
+        User.findOneAndUpdate(query, upsertUser, {upsert:true}, function(err, doc){
+            if (err) return res.send(500, { error: err });
+            return res.send("succesfully saved");
+        });
 
+    })
+    
+    // Get user by user id
+    app.get('/api/getuser/:id', function(req, res) {        
+        var id = req.param('id');
+        console.log("fetching recipes for user: "+id);
+        // use mongoose to get all reviews in the database
+        User.findOne(
+            {
+                user_id:id,
+            }
+        )
+        .exec(function(err, user) {
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err){
+                res.send(err)
+                console.log(err);
+            }else{
+                res.json(user); 
+            }
+        });
+    });
  
     // Get recipes by user id
-    app.get('/api/getRecipes/:id', function(req, res) {
+    app.get('/api/getRecipes/:id', function(req, res) {        
         var id = req.param('id');
         console.log("fetching recipes for user: "+id);
         // use mongoose to get all reviews in the database

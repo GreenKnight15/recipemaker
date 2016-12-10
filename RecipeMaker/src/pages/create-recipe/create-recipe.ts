@@ -44,7 +44,7 @@ export class CreateRecipe implements OnInit{
     user:User;
     
     ngOnInit(){
-            this.user = this.auth.myUser;
+            this.user = this.auth.user;
             this.recipeForm = new FormGroup({
             title: new FormControl('',[<any>Validators.required,<any>Validators.minLength(5)]),
             description: new FormControl('',[<any>Validators.required,<any>Validators.minLength(5)]),       

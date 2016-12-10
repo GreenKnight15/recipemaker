@@ -9,17 +9,26 @@ import { User } from '../../models/user';
 })
 export class Featured implements OnInit {
 
-    userPic:String;
-    user:Object;
-    
+    user:User;
+    myUser:User;
+    userName:String;
   constructor(public navCtrl: NavController,public auth: AuthService) {
     
   }
     
     ngOnInit(){
         this.user = this.auth.user
+        this.myUser = this.auth.myUser;
+
     }
     
-        ionViewDidLoad() {
-        }
+    ionViewDidLoad() {
+        this.init();
+    }
+    
+    init(){
+        this.myUser = this.auth.myUser;
+        this.userName = this.myUser.name;
+        console.log(this.myUser);
+    }
 }

@@ -33,7 +33,7 @@ export class YourRecipes implements OnInit{
     
     
     ngOnInit(){
-      this.user = this.auth.myUser
+      this.user = this.auth.user
       
       this.r = {
         Id:"qweqweqwe",
