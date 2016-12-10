@@ -1,5 +1,5 @@
 import { Component,OnInit  } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform  } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
@@ -31,9 +31,11 @@ export class CreateRecipe implements OnInit{
     public recipeForm;
     public submitted: boolean;
     public events: any[] = [];
-    private id = "5845109749ada014e89fde25";
+    public platform;
 
-  constructor(public navCtrl: NavController, private recipeService: RecipeService, private formBuilder: FormBuilder,public auth: AuthService ) {}
+  constructor(public navCtrl: NavController, private recipeService: RecipeService, private formBuilder: FormBuilder,public auth: AuthService,platform: Platform ) {
+      this.platform = platform;
+  }
     
     meals = Meals;
     catagories = Catagories;

@@ -48,23 +48,32 @@
           <ion-item >
             <ion-list>
                 <ion-grid detail-push *ngFor="let item of ingredients">
-                <ion-row> 
-                    <ion-col width-90>
-                        {{item}}
-                    </ion-col>
-                    <ion-col width-10>
-                        <button ion-button small color="danger" type="button" (click)="deleteIngredient( item )"> Delete </button>
-                    </ion-col>
-                     </ion-row>
+                    <ion-row > 
+                        <ion-col width-90>
+                            {{item}}
+                        </ion-col>
+                        <ion-col width-10>
+                            <button *ngIf="!platform.is('mobile')" ion-button small color="danger" type="button" (click)="deleteIngredient( item )"> Delete </button>
+                            <button *ngIf="platform.is('mobile')" ion-button small color="danger" type="button" (click)="deleteIngredient( item )"> <ion-icon name="close"></ion-icon> </button>
+                        </ion-col>
+                    </ion-row>
                 </ion-grid>  
             </ion-list>
         </ion-item>
           <ion-grid>
-            <ion-row> 
-                <ion-col width-90>
+            <ion-row *ngIf="!platform.is('mobile')" > 
+                <ion-col width-90 >
                     <ion-textarea inline right type="text" #ingredientTxt (ngModel)="ingredientTxt" value="{{ingredientTxt.value}}" placeholder="New Ingredient"></ion-textarea>                
                 </ion-col>
                 <ion-col width-10>
+                    <button ion-button  type="button" (click)="addIngredient(ingredientTxt.value); ingredientTxt.value=null" >Add</button>                 
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="platform.is('mobile')" > 
+                <ion-col width-80>
+                    <ion-textarea inline right type="text" #ingredientTxt (ngModel)="ingredientTxt" value="{{ingredientTxt.value}}" placeholder="New Ingredient"></ion-textarea>                
+                </ion-col>
+                <ion-col width-20>
                     <button ion-button  type="button" (click)="addIngredient(ingredientTxt.value); ingredientTxt.value=null" >Add</button>                 
                 </ion-col>
             </ion-row>
@@ -78,17 +87,24 @@
                         {{item}}
                     </ion-col>
                 <ion-col width-10>
-                    <button ion-button small color="danger" type="button" (click)="deleteStep( item )"> Delete </button>
+                    <button *ngIf="!platform.is('mobile')" ion-button small color="danger" type="button" (click)="deleteStep( item )"> Delete </button>
+                    <button *ngIf="platform.is('mobile')" ion-button small color="danger" type="button" (click)="deleteStep( item )"> <ion-icon name="close"></ion-icon> </button>
                 </ion-col>
               </ion-row>
             </ion-grid>
             </ion-list>
         </ion-item>
         <ion-grid>
-            <ion-row> 
+            <ion-row *ngIf="!platform.is('mobile')"> 
                 <ion-col width-90>
                     <ion-textarea inline right type="text" #stepTxt (ngModel)="stepTxt" value="{{stepTxt.value}}" placeholder="New Instruction"></ion-textarea>                </ion-col>
                 <ion-col width-10>
+                    <button ion-button type="button" (click)="addStep(stepTxt.value); stepTxt.value=null" >Add</button>                 </ion-col>
+            </ion-row>
+            <ion-row *ngIf="platform.is('mobile')"> 
+                <ion-col width-80>
+                    <ion-textarea inline right type="text" #stepTxt (ngModel)="stepTxt" value="{{stepTxt.value}}" placeholder="New Instruction"></ion-textarea>                </ion-col>
+                <ion-col width-20>
                     <button ion-button type="button" (click)="addStep(stepTxt.value); stepTxt.value=null" >Add</button>                 </ion-col>
             </ion-row>
         </ion-grid>

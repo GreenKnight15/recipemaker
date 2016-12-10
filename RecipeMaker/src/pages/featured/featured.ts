@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
-import { NavController } from 'ionic-angular';
+import { NavController, MenuController  } from 'ionic-angular';
 import { User } from '../../models/user';
 
 @Component({
@@ -12,13 +12,14 @@ export class Featured implements OnInit {
     user:User;
     myUser:User;
     userName:String;
-  constructor(public navCtrl: NavController,public auth: AuthService) {
-    
+    authenticated;
+  constructor(public navCtrl: NavController,public auth: AuthService, public menuCtrl: MenuController) {
+            this.user = this.auth.user
+        this.myUser = this.auth.myUser;
+        this.authenticated = this.auth.authenticated();
   }
     
     ngOnInit(){
-        this.user = this.auth.user
-        this.myUser = this.auth.myUser;
 
     }
     
@@ -26,9 +27,24 @@ export class Featured implements OnInit {
         this.init();
     }
     
+    enableAuthenticatedMenu() {
+        this.menuCtrl.enable(true, 'authenticated');
+        this.menuCtrl.enable(false, 'unauthenticated');
+    }
+    disableAuthenticatedMenu() {
+            this.menuCtrl.enable(false, 'authenticated');
+            this.menuCtrl.enable(true, 'unauthenticated');
+    }
+    
     init(){
         this.myUser = this.auth.myUser;
         this.userName = this.myUser.name;
-        console.log(this.myUser);
+        console.log(this.authenticated);
+        if(this.authenticated){
+            this.enableAuthenticatedMenu()
+        }else{
+            this.disableAuthenticatedMenu()
+        }
+
     }
 }

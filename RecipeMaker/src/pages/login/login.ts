@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
+import {Component, OnInit, Injectable } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Featured } from '../featured/featured';
 
@@ -8,19 +8,23 @@ import { Featured } from '../featured/featured';
   templateUrl: 'login.html'
 
 })
-export class Login {
-    
-   loggedIn: boolean;
+@Injectable()
+export class Login implements OnInit{
+        
   // We need to inject AuthService so that we can
   // use it in the view
-  constructor(public auth: AuthService,public navCtrl: NavController ) {    
+  constructor(public auth: AuthService,public navCtrl: NavController ) { 
+      this.auth = auth;
+
   }
   
+    ngOnInit(){
+
+    }
      ionViewDidLoad() {
-         this.loggedIn = this.auth.authenticated();
-            console.log(this.loggedIn);
-            if(this.loggedIn){
-                this.navCtrl.push(Featured);
-            }
+         this.init();
       }    
+    init(){
+
+    }
 }

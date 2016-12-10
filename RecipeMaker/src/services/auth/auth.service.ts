@@ -80,6 +80,10 @@ export class AuthService {
   public authenticated() { 
     return tokenNotExpired('id_token', this.idToken);
   }
+
+  public loggedIn() {
+    return tokenNotExpired();
+  }
   
   public login() {
     // Show the Auth0 Lock widget

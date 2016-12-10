@@ -19,12 +19,13 @@
   
   <ion-card>
 
-    <ion-item *ngIf="auth.user">
+    <ion-item *ngIf="myUser">
       <ion-avatar item-left>
-        <img src="{{ auth.user.picture }}">
+        <img src="{{ myUser.picture }}">
       </ion-avatar>
-      <h2>{{ auth.user.nickname }}</h2>
-      <p>{{ auth.user.email }}</p>
+      <h1>{{ myUser.nickname }}</h1>
+      <h2>{{ myUser.email }}</h2>
+
     </ion-item>
   
   </ion-card>
