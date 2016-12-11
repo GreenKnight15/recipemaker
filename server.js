@@ -12,7 +12,7 @@ var methodOverride = require('method-override'); // simulate DELETE and PUT (exp
 var cors = require('cors');
  
 app.use(express.static('www'));
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 8100);
 
 // Configuration
 var connectionString = require('./connectionString');

@@ -260,6 +260,7 @@ export class MyApp {
     }
 
     public getCurrentUser(user_id){
+        console.log(this.url);
         return new Promise(resolve => {
           this.authHttp.get(this.url+'/api/getuser/' + user_id)
             .map(res => res.json())
