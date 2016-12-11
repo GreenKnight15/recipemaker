@@ -11,7 +11,7 @@ import { Http, Headers } from '@angular/http';
 
 @Injectable()
 export class AuthService {
-
+  url = 'https://dishdesigner.herokuapp.com';
   jwtHelper: JwtHelper = new JwtHelper();
   auth0 = new Auth0({clientID: 'umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', domain: 'recipemaker.auth0.com' });
   lock = new Auth0Lock('umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', 'recipemaker.auth0.com', {
@@ -179,7 +179,7 @@ export class AuthService {
     public upsertUser(user:User){
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.authHttp.post('http://localhost:8080/api/user', JSON.stringify(user), {headers: headers})
+        this.authHttp.post(this.url+'/api/user', JSON.stringify(user), {headers: headers})
           .subscribe(res => {
           }, error => console.log(error)
          );
@@ -187,7 +187,7 @@ export class AuthService {
 
     public getCurrentUser(user_id){
         return new Promise(resolve => {
-          this.authHttp.get('http://localhost:8080/api/getuser/' + user_id)
+          this.authHttp.get(this.url+'/api/getuser/' + user_id)
             .map(res => res.json())
             .subscribe(data => {
               this.data = data;
