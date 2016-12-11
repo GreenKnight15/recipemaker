@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');    // pull information from HTML POST (
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var cors = require('cors');
  
+app.use(express.static('www'));
+app.set('port', process.env.PORT || 5000);
 
 // Configuration
 var connectionString = require('./connectionString');
@@ -170,5 +172,6 @@ var Recipe = mongoose.model('Recipe');
     }) 
  
 // listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
+});
