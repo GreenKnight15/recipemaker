@@ -31,7 +31,8 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = Featured;
-   
+  url = 'https://dishdesigner.herokuapp.com';
+
   pages: Array<{title: string, component: any}>;
   unAuthPages: Array<{title: string, component: any}>;
 
@@ -252,7 +253,7 @@ export class MyApp {
     public upsertUser(user:User){
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.authHttp.post('http://localhost:8080/api/user', JSON.stringify(user), {headers: headers})
+        this.authHttp.post(this.url+'/api/user', JSON.stringify(user), {headers: headers})
           .subscribe(res => {
           }, error => console.log(error)
          );
@@ -260,7 +261,7 @@ export class MyApp {
 
     public getCurrentUser(user_id){
         return new Promise(resolve => {
-          this.authHttp.get('http://localhost:8080/api/getuser/' + user_id)
+          this.authHttp.get(this.url+'/api/getuser/' + user_id)
             .map(res => res.json())
             .subscribe(data => {
               this.data = data;
