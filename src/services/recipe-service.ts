@@ -16,10 +16,12 @@ export class RecipeService {
   }
  
   getUserRecipes(id){
+      console.log('getUserRecipes:'+id);
     return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/getRecipes/' + id)
         .map(res => res.json())
         .subscribe(data => {
+          console.log(data)
           resolve(data);
         });
     });
@@ -35,11 +37,12 @@ export class RecipeService {
   }
     
   lazySearchByCategory(catagoryId, page, perPage){
-      console.log(catagoryId, page, perPage);
-    return new Promise(resolve => {
+      console.log("lazySearchByCategory"+catagoryId)
+      return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/category/'+catagoryId+'/'+page+'/'+perPage)
         .map(res => res.json())
         .subscribe(data => {
+          console.log(data)
           resolve(data);
         });
     });

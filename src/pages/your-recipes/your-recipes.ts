@@ -32,12 +32,10 @@ export class YourRecipes implements OnInit{
     
     ngOnInit(){
       this.user = this.auth.user
- 
       this.recipeService.getUserRecipes(this.user.user_id)
         .then((data) => { 
           this.userRecipes = data;
       })
-
     };
     
     recipeSelected(recipe:Recipe){
