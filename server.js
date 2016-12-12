@@ -99,7 +99,7 @@ var Recipe = mongoose.model('Recipe');
                 }
             }) 
         
-        User.update( {user_id: userId}, { $pullAll: {likes: recipeId }})        .exec(function(err, db_res) { 
+        User.update( {user_id: userId}, { $pull: {likes: recipeId }})        .exec(function(err, db_res) { 
             if (err){
                 console.log(err);
                 return res.send(500, { error: err });
