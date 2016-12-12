@@ -64,7 +64,7 @@ var Recipe = mongoose.model('Recipe');
             });
         }
         else{
-             Recipe.create(recipe),function(err, recipe) {
+             Recipe.create(recipe,function(err, recipe) {
                 if (err){
                     return res.send(500, { error: err });
                 }
