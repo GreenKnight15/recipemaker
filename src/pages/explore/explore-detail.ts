@@ -13,6 +13,8 @@ import { AuthService} from '../../services/auth/auth.service';
 import { Catagory } from '../../models/catagory';
 import { Catagories } from '../../models/catagories';
 import { RecipeDetails } from '../recipe-details/recipe-details'
+import { Storage } from '@ionic/storage';
+import { User } from '../../models/user'
 
 @Component({
   selector: 'page-explore-detail',
@@ -26,12 +28,13 @@ export class ExploreDetail implements OnInit{
     perPage:Number;
     categoryId;
     categoryName:String;
-    
+    storage: Storage = new Storage();
+
     constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController ) {        
     }
     
     public recipes = []; 
-    myUser;
+    myUser:User;
     userLikes;
     
      ngOnInit(){
@@ -39,18 +42,25 @@ export class ExploreDetail implements OnInit{
         this.categoryName = Catagories[this.categoryId].name;
         this.page = 0;
         this.perPage = 10;
-         this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
+        this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
         .then((data) => { 
           this.recipes.push(data);
       })
+       this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
+            this.myUser = data;
+            console.log(data);
+
+            this.storage.set('myUser', JSON.stringify(data));
+          });
      }
     
     ionViewDidLoad() {
+        this.myUser = this.auth.myUser;
+        console.log(this.myUser);
         this.init();
     }
     
     init(){
-        this.myUser = this.auth.myUser;
         this.userLikes = this.myUser.likes;
         console.log(this.userLikes);
 

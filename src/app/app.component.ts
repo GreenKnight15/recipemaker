@@ -77,7 +77,8 @@ export class MyApp {
         this.storage.get('profile').then(profile => {
           this.user = JSON.parse(profile);
           this.getCurrentUser(this.user.user_id).then((data:User) => { 
-            this.myUser = data
+            this.myUser = data;
+            this.storage.set('myUser', JSON.stringify(data));
           });
           this.upsertUser(this.user);
         }).catch(error => {
@@ -104,7 +105,8 @@ export class MyApp {
             this.storage.set('profile', JSON.stringify(profile));
             this.user = profile;
             this.getCurrentUser(this.user.user_id).then((data:User) => { 
-                this.myUser = data
+                this.myUser = data;
+                this.storage.set('myUser', JSON.stringify(data));
             });
           });
          
@@ -168,6 +170,7 @@ export class MyApp {
   public logout() {
     this.storage.remove('profile');
     this.storage.remove('id_token');
+    this.storage.remove('myUser');
     this.idToken = null;
     this.storage.remove('refresh_token');
     this.zoneImpl.run(() => this.user = null);
