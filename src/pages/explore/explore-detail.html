@@ -9,8 +9,8 @@
 
 
 <ion-content padding>
-    <ion-list *ngFor="let item of recipes">
-        <ion-item *ngFor="let i of item" (click)="recipeSelected(i)">
+    <ion-list >
+        <ion-item *ngFor="let i of recipes[0]" (click)="recipeSelected(i)">
             <h1>{{i.title}}</h1>
         </ion-item>
     </ion-list>
