@@ -174,12 +174,14 @@ takePicture(){
         //pop up saved
         //clear fields
         this.presentToast();
-        console.log('saved');
-        this.ingredients = [];
-        this.ingredientTxt = '';
-        this.stepTxt ='';
-        this.steps = [];
-        this.recipeForm = null; 
+         setTimeout( () => {
+            console.log('saved');
+            this.ingredients = [];
+            this.ingredientTxt = '';
+            this.stepTxt ='';
+            this.steps = [];
+            this.recipeForm = null; 
+         },100)
         });
       }
   }

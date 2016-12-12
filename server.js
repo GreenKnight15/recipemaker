@@ -55,16 +55,21 @@ var Recipe = mongoose.model('Recipe');
     app.post('/api/recipe', function(req, res) {
         console.log('saving recipe:'+req.body)
         var query;
+        var recipe = req.body;
         if(req.body._id){
             query = {Id:req.body._id};  
-        }else{
-            query = {};  
+            Recipe.findOneAndUpdate(query, recipe, {upsert:true},function(err, recipe) {
+                if (err)
+                    return res.send(500, { error: err });
+            });
         }
-        var recipe = req.body;
-        Recipe.findOneAndUpdate(query, recipe, {upsert:true},function(err, recipe) {
-            if (err)
-                return res.send(500, { error: err });
-        });
+        else{
+             Recipe.create(recipe),function(err, recipe) {
+                if (err){
+                    return res.send(500, { error: err });
+                }
+            });
+        }
     });
 
     app.post('/api/recipe/like',function(req, res){
