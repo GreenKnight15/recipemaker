@@ -145,7 +145,7 @@ var _View_Featured0 = (function (_super) {
         this._appEl_6.initComponent(this._ToolbarTitle_6_4.context, [], compView_6);
         this._text_7 = this.renderer.createText(null, 'Featured ', null);
         compView_6.create(this._ToolbarTitle_6_4.context, [[].concat([this._text_7])], null);
-        this._text_8 = this.renderer.createText(null, '\n      \n    ', null);
+        this._text_8 = this.renderer.createText(null, '\n\n    ', null);
         this._el_9 = this.renderer.createElement(null, 'ion-buttons', null);
         this.renderer.setElementAttribute(this._el_9, 'right', '');
         this._ToolbarItem_9_3 = new import17.Wrapper_ToolbarItem(this.parentInjector.get(import19.Config), new import20.ElementRef(this._el_9), this.renderer, this.parentInjector.get(import24.Toolbar, null), this._Navbar_2_4.context);
@@ -446,7 +446,6 @@ var _View_Featured3 = (function (_super) {
     }
     _View_Featured3.prototype.createInternal = function (rootSelector) {
         this._el_0 = this.renderer.createElement(null, 'ion-content', null);
-        this.renderer.setElementAttribute(this._el_0, 'class', 'has-header has-subheader');
         this.renderer.setElementAttribute(this._el_0, 'padding', '');
         this._appEl_0 = new import3.AppElement(0, null, this, this._el_0);
         var compView_0 = import35.viewFactory_Content0(this.viewUtils, this.injector(0), this._appEl_0);

@@ -22,6 +22,7 @@ export var YourRecipes = (function () {
     YourRecipes.prototype.ionViewDidLoad = function () {
     };
     YourRecipes.prototype.ngOnInit = function () {
+        var _this = this;
         this.user = this.auth.user;
         this.r = {
             Id: "qweqweqwe",
@@ -40,12 +41,13 @@ export var YourRecipes = (function () {
             likes: ["123123123123", "123123123"],
             dateCreated: null
         };
-        //      this.recipeService.getUserRecipes(this.user.identities[0].user_id)
-        //        .then((data) => { 
-        //          this.userRecipes = data;
-        //      })
-        this.userRecipes.push(this.r);
-        console.log(this.userRecipes);
+        this.recipeService.getUserRecipes(this.user.identities[0].user_id)
+            .then(function (data) {
+            _this.userRecipes = data;
+        });
+        //      
+        //    this.userRecipes.push(this.r);
+        //    console.log(this.userRecipes);
     };
     ;
     YourRecipes.prototype.recipeSelected = function (recipe) {

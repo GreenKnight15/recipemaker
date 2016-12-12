@@ -8,6 +8,7 @@ export var RecipeService = (function () {
         this.http = http;
         this.authHttp = authHttp;
         this.auth = auth;
+        this.url = 'https://dishdesigner.herokuapp.com';
         this.data = null;
     }
     RecipeService.prototype.getUserRecipes = function (id) {
@@ -16,7 +17,7 @@ export var RecipeService = (function () {
             return Promise.resolve(this.data);
         }
         return new Promise(function (resolve) {
-            _this.authHttp.get('http://localhost:8080/api/getRecipes/' + id)
+            _this.authHttp.get(_this.url + '/api/getRecipes/' + id)
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 _this.data = data;
@@ -29,7 +30,7 @@ export var RecipeService = (function () {
         console.log(recipe);
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.authHttp.post('http://localhost:8080/api/recipe', JSON.stringify(recipe), { headers: headers })
+        this.authHttp.post(this.url + '/api/recipe', JSON.stringify(recipe), { headers: headers })
             .subscribe(function (res) {
         }, function (error) { return console.log(error); });
     };
@@ -37,7 +38,7 @@ export var RecipeService = (function () {
         var _this = this;
         console.log(catagoryId, page, perPage);
         return new Promise(function (resolve) {
-            _this.authHttp.get('http://localhost:8080/api/category/' + catagoryId + '/' + page + '/' + perPage)
+            _this.authHttp.get(_this.url + '/api/category/' + catagoryId + '/' + page + '/' + perPage)
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 _this.data = data;
@@ -46,7 +47,7 @@ export var RecipeService = (function () {
         });
     };
     RecipeService.prototype.deleteRecipe = function (id) {
-        this.authHttp.delete('http://localhost:8080/api/recipe/' + id).subscribe(function (res) {
+        this.authHttp.delete(this.url + '/api/recipe/' + id).subscribe(function (res) {
             console.log(res.json());
         }, function (error) { return console.log(error); });
     };

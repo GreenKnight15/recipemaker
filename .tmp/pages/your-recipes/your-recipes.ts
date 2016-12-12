@@ -54,13 +54,13 @@ export class YourRecipes implements OnInit{
     
     };
       
-//      this.recipeService.getUserRecipes(this.user.identities[0].user_id)
-//        .then((data) => { 
-//          this.userRecipes = data;
-//      })
-      
-    this.userRecipes.push(this.r);
-    console.log(this.userRecipes);
+      this.recipeService.getUserRecipes(this.user.identities[0].user_id)
+        .then((data) => { 
+          this.userRecipes = data;
+      })
+//      
+//    this.userRecipes.push(this.r);
+//    console.log(this.userRecipes);
     };
     
     recipeSelected(recipe:Recipe){

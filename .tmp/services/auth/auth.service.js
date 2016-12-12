@@ -7,6 +7,7 @@ export var AuthService = (function () {
     function AuthService(authHttp, zone) {
         var _this = this;
         this.authHttp = authHttp;
+        this.url = 'https://dishdesigner.herokuapp.com';
         this.jwtHelper = new JwtHelper();
         this.auth0 = new Auth0({ clientID: 'umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', domain: 'recipemaker.auth0.com' });
         this.lock = new Auth0Lock('umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', 'recipemaker.auth0.com', {
@@ -46,9 +47,9 @@ export var AuthService = (function () {
                 profile.user_metadata = profile.user_metadata || {};
                 _this.storage.set('profile', JSON.stringify(profile));
                 _this.user = profile;
-                //        this.getCurrentUser(this.user.user_id).then((data:User) => { 
-                //            this.myUser = data
-                //        });
+                _this.getCurrentUser(_this.user.user_id).then(function (data) {
+                    _this.myUser = data;
+                });
             });
             _this.lock.hide();
             _this.storage.set('refresh_token', authResult.refreshToken);
@@ -147,14 +148,14 @@ export var AuthService = (function () {
     AuthService.prototype.upsertUser = function (user) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.authHttp.post('http://localhost:8080/api/user', JSON.stringify(user), { headers: headers })
+        this.authHttp.post(this.url + '/api/user', JSON.stringify(user), { headers: headers })
             .subscribe(function (res) {
         }, function (error) { return console.log(error); });
     };
     AuthService.prototype.getCurrentUser = function (user_id) {
         var _this = this;
         return new Promise(function (resolve) {
-            _this.authHttp.get('http://localhost:8080/api/getuser/' + user_id)
+            _this.authHttp.get(_this.url + '/api/getuser/' + user_id)
                 .map(function (res) { return res.json(); })
                 .subscribe(function (data) {
                 _this.data = data;
