@@ -67,7 +67,7 @@ var Recipe = mongoose.model('Recipe');
         });
     });
 
-    app.post('/api/recipe/like'){
+    app.post('/api/recipe/like',function(req, res){
         var id = req.body.Id;
         Recipe.findOneAndUpdate({Id:id},{$inc:{ like_count:1 }})
         .exec(function(err, db_res) { 
@@ -75,9 +75,9 @@ var Recipe = mongoose.model('Recipe');
                     console.log(err);
                     return res.send(500, { error: err });
             }) 
-    }
+    })
 
-    app.post('/api/recipe/unlike'){
+    app.post('/api/recipe/unlike',function(req, res){
         var id = req.body.Id;
         Recipe.findOneAndUpdate({Id:id},{$dec:{ like_count:1 }})
         .exec(function(err, db_res) { 
@@ -85,7 +85,7 @@ var Recipe = mongoose.model('Recipe');
                     console.log(err);
                     return res.send(500, { error: err });
             }) 
-    }
+    })
  
     
     // Get user by user id

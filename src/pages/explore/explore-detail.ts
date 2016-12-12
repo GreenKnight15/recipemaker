@@ -53,6 +53,16 @@ export class ExploreDetail implements OnInit{
       })
     } 
     
+    like(id,index){
+        this.recipeService.likeRecipe(id);
+        this.recipes[index].like_count++;
+    }
+    dislike(id,index){
+        this.recipeService.unlikeRecipe(id);
+        this.recipes[index].like_count--;
+
+    }
+    
     
     recipeSelected(recipe:Recipe){
         let modal = this.modalCtrl.create(RecipeDetails,{item:recipe});
