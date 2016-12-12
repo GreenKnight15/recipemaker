@@ -56,7 +56,7 @@ var Recipe = mongoose.model('Recipe');
         console.log('saving recipe:'+req.body)
         var query;
         var recipe = req.body;
-        if(req.body._id){
+        if(req.body._id != null){
             query = {Id:req.body._id};  
             Recipe.findOneAndUpdate(query, recipe, {upsert:true},function(err, recipe) {
                 if (err)

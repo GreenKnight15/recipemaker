@@ -42,18 +42,20 @@ export class ExploreDetail implements OnInit{
         this.categoryName = Catagories[this.categoryId].name;
         this.page = 0;
         this.perPage = 10;
-        this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
-        .then((data) => { 
-          this.addRecipePage(data);
-      })
 
         this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
             this.myUser = data;
             this.storage.set('myUser', JSON.stringify(data));
           });
         this.myUser = this.auth.myUser;
-        this.userLikes = this.myUser.likes;        
-         this.compareUserLikesToList();
+        this.userLikes = this.myUser.likes;  
+         
+        this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
+        .then((data) => { 
+        setTimeout( () => {  
+            this.recipes = this.compareUserLikesToList(this.parseRecipesObject(data),this.userLikes);
+        },100)
+      })
      }
     
     ionViewDidLoad() {
@@ -62,42 +64,37 @@ export class ExploreDetail implements OnInit{
         this.init();
     }
     
-    addRecipePage(data){
+    parseRecipesObject(data){
+        var array = [];
         for( var i in data ) {
             if (data.hasOwnProperty(i)){
-                this.recipes.push(data[i]);
+                array.push(data[i]);
             }
         }
+        return array;
     }
     
     init(){
     }
     
-    compareUserLikesToList(){
-            console.log("comparing");
-         setTimeout( () => {
-
-            for(var i=0; i< this.recipes.length; i++){
-                for(var j=0; j< this.userLikes.length; j++){
-                    if(this.recipes[i]._id == this.myUser.likes[j]){
-                        console.log(this.recipes[i]._id);
-                        console.log(this.myUser.likes[j]);
-
-                        this.recipes[i].likedByUser = true;
-                    }
+    compareUserLikesToList(recipePageData,userLikes ){
+        for(var i=0; i< recipePageData.length; i++){
+            for(var j=0; j< userLikes.length; j++){
+                if(recipePageData[i]._id == userLikes[j]){
+                    recipePageData[i].likedByUser = true;
+                }else{
+                    recipePageData[i].likedByUser = false;
                 }
             }
-         },200)
-        
+        }
+        return recipePageData;
     }
     
     
     onScrollEnd(){
         this.page++;                 
         this.recipeService.lazySearchByCategory(this.categoryId,this.page,this.perPage)
-        .then((data) => { 
-        this.recipes.push(data);
-        this.compareUserLikesToList();
+        .then((data) => {   this.recipes.push(this.compareUserLikesToList(this.parseRecipesObject(data),this.userLikes));
       })
     } 
     
