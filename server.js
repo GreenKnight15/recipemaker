@@ -41,21 +41,6 @@ var Recipe = mongoose.model('Recipe');
  
 // Routes
 
-//     app.get('/api/james', function() {
-//        console.log("James made");
-//        var newUser = new User({
-//            name:{first:"James",last:"Ritter"},
-//            username : "GreenKnight15",
-//            email:"jamesritter15@gmail.com",
-//            admin:true,
-//            dateCreated:Date.now()
-//        });
-//         
-//        newUser.save(function(err, recipe) {
-//
-//        });
-// 
-//    });
     app.post('/api/user',function(req,res){
         var query = {'user_id':req.body.user_id};  
         var upsertUser = req.body;
@@ -134,26 +119,14 @@ var Recipe = mongoose.model('Recipe');
             }
         });
     });
+    
  
-    // create review and send back all reviews after creation
     app.post('/api/recipe', function(req, res) {
-        console.log("creating recipe: "+req.body.title);
-        // create a recipe, information comes from request from Ionic
-        var newRecipe = new Recipe({
-            title : req.body.title,
-            userId:req.body.userId,
-            description : req.body.description,
-            ingredients:req.body.ingredients,
-            steps: req.body.steps,
-            meal:req.body.meal,
-            imageUrl: "",
-            dateCreated:req.body.dateCreated,
-            likes:req.body.likes,
-            category:req.body.category,
-            userImg:req.body.userImg
-        }).save(function(err, newRecipe) {
+        var query = {'Id':req.body.Id};  
+        var recipe = req.body;
+        Recipe.findOneAndUpdate(query, recipe,function(err, recipe) {
             if (err)
-                res.send(err);
+                return res.send(500, { error: err });
         });
     });
  

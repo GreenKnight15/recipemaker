@@ -14,7 +14,7 @@ var Recipe = new Schema({
     imageUrl:String,
     reviews: [{type: String, ref: 'Review' }],
     dateCreated: Date,
-    likes:[String],
+    like_count:Number,
     category:[Number],
     userImg:String
 });

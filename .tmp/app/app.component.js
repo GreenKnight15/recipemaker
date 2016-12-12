@@ -76,12 +76,12 @@ export var MyApp = (function () {
                         _this.myUser = data;
                     });
                 });
+                _this.nav.setRoot(Featured);
                 _this.lock.hide();
                 _this.storage.set('refresh_token', authResult.refreshToken);
                 _this.zoneImpl.run(function () { return _this.user = authResult.profile; });
                 // Schedule a token refresh
                 _this.scheduleRefresh();
-                _this.nav.setRoot(Featured);
             });
         });
         // used for an example of ngFor and navigation

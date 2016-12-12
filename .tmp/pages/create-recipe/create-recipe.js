@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, ToastController, ActionSheetController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
@@ -8,6 +8,7 @@ import { Meals } from '../../models/meals';
 import { Featured } from '../featured/featured';
 import { AuthService } from '../../services/auth/auth.service';
 import { Catagories } from '../../models/catagories';
+import { Camera, ImagePicker } from 'ionic-native';
 /*
   Generated class for the CreateRecipe page.
 
@@ -15,11 +16,13 @@ import { Catagories } from '../../models/catagories';
   Ionic pages and navigation.
 */
 export var CreateRecipe = (function () {
-    function CreateRecipe(navCtrl, recipeService, formBuilder, auth, platform) {
+    function CreateRecipe(navCtrl, recipeService, formBuilder, auth, platform, toastCtrl, actionSheetCtrl) {
         this.navCtrl = navCtrl;
         this.recipeService = recipeService;
         this.formBuilder = formBuilder;
         this.auth = auth;
+        this.toastCtrl = toastCtrl;
+        this.actionSheetCtrl = actionSheetCtrl;
         this.events = [];
         this.meals = Meals;
         this.catagories = Catagories;
@@ -58,10 +61,77 @@ export var CreateRecipe = (function () {
             }
         }
     };
+    CreateRecipe.prototype.addPhoto = function () {
+        this.presentPhotoActionSheet();
+    };
     CreateRecipe.prototype.cancel = function () {
         this.navCtrl.setRoot(Featured);
     };
-    CreateRecipe.prototype.ionViewDidLoad = function () {
+    CreateRecipe.prototype.presentToast = function () {
+        var toast = this.toastCtrl.create({
+            message: 'Recipe was added successfully',
+            duration: 3000
+        });
+        toast.present();
+    };
+    CreateRecipe.prototype.takePicture = function () {
+        var _this = this;
+        Camera.getPicture({
+            destinationType: Camera.DestinationType.DATA_URL,
+            targetWidth: 1000,
+            targetHeight: 1000,
+            saveToPhotoAlbum: true
+        }).then(function (imageData) {
+            // imageData is a base64 encoded string
+            _this.Image = "data:image/jpeg;base64," + imageData;
+            console.log(_this.Image);
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    CreateRecipe.prototype.openWebFiles = function () {
+    };
+    CreateRecipe.prototype.openGallery = function () {
+        // if(this.platform.hasReadPermission() || this.platform.is('ios')){
+        ImagePicker.getPictures({
+            maximumImagesCount: 1,
+            quality: 100
+        }).then(function (results) {
+            for (var i = 0; i < results.length; i++) {
+                console.log('Image URI: ' + results[i]);
+            }
+        }, function (err) { });
+        // }
+        // else if(this.platform.is('android')){
+        //     this.platform.requestReadPermission()
+        // }
+    };
+    CreateRecipe.prototype.presentPhotoActionSheet = function () {
+        var _this = this;
+        var actionSheet = this.actionSheetCtrl.create({
+            title: 'Upload a Photo',
+            buttons: [
+                {
+                    text: 'Camera',
+                    role: 'destructive',
+                    handler: function () {
+                        _this.takePicture();
+                    }
+                }, {
+                    text: 'Gallery',
+                    handler: function () {
+                        _this.openGallery();
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
     };
     CreateRecipe.prototype.save = function (model, isValid) {
         model.ingredients = this.ingredients;
@@ -73,6 +143,7 @@ export var CreateRecipe = (function () {
             this.recipeService.createRecipe(model, function () {
                 //pop up saved
                 //clear fields
+                this.presentToast();
                 console.log('saved');
                 this.ingredients = [];
                 this.ingredientTxt = '';
@@ -96,6 +167,8 @@ export var CreateRecipe = (function () {
         { type: FormBuilder, },
         { type: AuthService, },
         { type: Platform, },
+        { type: ToastController, },
+        { type: ActionSheetController, },
     ];
     return CreateRecipe;
 }());

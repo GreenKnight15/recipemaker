@@ -108,6 +108,16 @@
                     <button ion-button type="button" (click)="addStep(stepTxt.value); stepTxt.value=null" >Add</button>                 </ion-col>
             </ion-row>
         </ion-grid>
+        <ion-grid>
+            <ion-row>
+                <ion-col width-20>
+                    <button ion-button type="button" primary medium  (click)="addPhoto()">Add Photo</button>   
+                </ion-col>
+                <ion-col width-80>
+                    <img [src]="Image" *ngIf="Image" />
+                </ion-col>
+            </ion-row>
+        </ion-grid>
         <button ion-button primary type="submit">Save</button>
         <button ion-button primary type="button" (click)="cancel()">Cancel</button>
         </ion-list>

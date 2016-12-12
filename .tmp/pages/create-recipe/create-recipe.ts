@@ -1,5 +1,5 @@
 import { Component,OnInit  } from '@angular/core';
-import { NavController, Platform  } from 'ionic-angular';
+import { NavController, Platform, ToastController, ActionSheetController   } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
@@ -13,6 +13,7 @@ import { AuthService} from '../../services/auth/auth.service';
 import { Catagory } from '../../models/catagory';
 import { Catagories } from '../../models/catagories';
 import { User } from '../../models/user';
+import {Camera, ImagePicker, File,FileChooser } from 'ionic-native';
 
 /*
   Generated class for the CreateRecipe page.
@@ -32,8 +33,10 @@ export class CreateRecipe implements OnInit{
     public submitted: boolean;
     public events: any[] = [];
     public platform;
+    public Image: string;
 
-  constructor(public navCtrl: NavController, private recipeService: RecipeService, private formBuilder: FormBuilder,public auth: AuthService,platform: Platform ) {
+
+  constructor(public navCtrl: NavController, private recipeService: RecipeService, private formBuilder: FormBuilder,public auth: AuthService,platform: Platform,public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController ) {
       this.platform = platform;
   }
     
@@ -79,10 +82,83 @@ export class CreateRecipe implements OnInit{
       }
     }
     
+    addPhoto(){
+        this.presentPhotoActionSheet();
+    }
+    
     cancel(){
         this.navCtrl.setRoot(Featured);
     }
-  ionViewDidLoad() {
+    
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Recipe was added successfully',
+      duration: 3000
+    });
+    toast.present();
+  }
+    
+takePicture(){
+    Camera.getPicture({
+        destinationType: Camera.DestinationType.DATA_URL,
+        targetWidth: 1000,
+        targetHeight: 1000,
+        saveToPhotoAlbum:true
+    }).then((imageData) => {
+      // imageData is a base64 encoded string
+        this.Image = "data:image/jpeg;base64," + imageData;
+        console.log(this.Image);
+    }, (err) => {
+        console.log(err);
+    });
+  }
+    
+  openWebFiles(){
+
+  }
+
+    openGallery(){
+    // if(this.platform.hasReadPermission() || this.platform.is('ios')){
+            ImagePicker.getPictures({
+                maximumImagesCount:1,
+                quality:100
+            }).then((results) => {
+              for (var i = 0; i < results.length; i++) {
+                  console.log('Image URI: ' + results[i]);
+              }
+            }, (err) => { });
+         // }
+       // else if(this.platform.is('android')){
+       //     this.platform.requestReadPermission()
+       // }
+    }
+
+    
+  presentPhotoActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Upload a Photo',
+      buttons: [
+        {
+          text: 'Camera',
+          role: 'destructive',
+          handler: () => {
+            this.takePicture() 
+          }
+        },{
+          text: 'Gallery',
+          handler: () => {
+            this.openGallery();
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+  actionSheet.present();
 
   }
 
@@ -97,6 +173,7 @@ export class CreateRecipe implements OnInit{
         this.recipeService.createRecipe(model,function(){
         //pop up saved
         //clear fields
+        this.presentToast();
         console.log('saved');
         this.ingredients = [];
         this.ingredientTxt = '';

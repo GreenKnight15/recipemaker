@@ -107,6 +107,9 @@ export class MyApp {
                 this.myUser = data
             });
           });
+         
+          this.nav.setRoot(Featured);
+
 
           this.lock.hide();
 
@@ -115,7 +118,6 @@ export class MyApp {
           // Schedule a token refresh
           this.scheduleRefresh(); 
             
-          this.nav.setRoot(Featured);
         });
          
         });
