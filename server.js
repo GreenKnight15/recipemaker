@@ -73,15 +73,17 @@ var Recipe = mongoose.model('Recipe');
 
         Recipe.findOneAndUpdate({_id:recipeId},{$inc:{ like_count:1 }})
         .exec(function(err, db_res) { 
-                if (err)
+                if (err){
                     console.log(err);
                     return res.send(500, { error: err });
+                }
             });
         
         User.update( {user_id: userId}, { $addToSet:{ likes:recipeId } } )        .exec(function(err, db_res) { 
-                if (err)
+                if (err){
                     console.log(err);
                     return res.send(500, { error: err });
+                }
             });
     })
 
@@ -91,15 +93,17 @@ var Recipe = mongoose.model('Recipe');
 
         Recipe.findOneAndUpdate({_id:recipeId},{$dec:{ like_count:1 }})
         .exec(function(err, db_res) { 
-                if (err)
+                if (err){
                     console.log(err);
                     return res.send(500, { error: err });
+                }
             }) 
         
         User.update( {user_id: userId}, { $pullAll: {likes: recipeId }})        .exec(function(err, db_res) { 
-            if (err)
+            if (err){
                 console.log(err);
                 return res.send(500, { error: err });
+            }
         });
     })
  
