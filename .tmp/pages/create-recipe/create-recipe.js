@@ -138,9 +138,10 @@ export var CreateRecipe = (function () {
         model.steps = this.steps;
         model.userId = this.user.user_id;
         model.dateCreated = new Date();
+        model.like_count = 0;
         console.log(model);
         if (isValid) {
-            this.recipeService.createRecipe(model, function () {
+            this.recipeService.saveRecipe(model, function () {
                 //pop up saved
                 //clear fields
                 this.presentToast();

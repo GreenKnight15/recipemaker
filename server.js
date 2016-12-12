@@ -42,6 +42,7 @@ var Recipe = mongoose.model('Recipe');
 // Routes
 
     app.post('/api/user',function(req,res){
+        console.log('saving user:'+req.body.user_id)
         var query = {'user_id':req.body.user_id};  
         var upsertUser = req.body;
         User.findOneAndUpdate(query, upsertUser, {upsert:true}, function(err, doc){
@@ -122,6 +123,7 @@ var Recipe = mongoose.model('Recipe');
     
  
     app.post('/api/recipe', function(req, res) {
+        console.log('saving recipe:'+req.body)
         var query = {'Id':req.body.Id};  
         var recipe = req.body;
         Recipe.findOneAndUpdate(query, recipe,function(err, recipe) {

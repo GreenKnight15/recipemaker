@@ -24,7 +24,7 @@ export var RecipeService = (function () {
             });
         });
     };
-    RecipeService.prototype.createRecipe = function (recipe, callback) {
+    RecipeService.prototype.saveRecipe = function (recipe, callback) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         this.authHttp.post(this.url + '/api/recipe', JSON.stringify(recipe), { headers: headers })

@@ -12,6 +12,7 @@ export class User {
     public nickname:String,
     public picture:String,
     public user_id:string,
+    public likes:String[],
     public admin: boolean,
     public identities:any
     ) { }

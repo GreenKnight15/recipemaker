@@ -11,7 +11,7 @@ export class Recipe {
     public imageUrl:String,
     public reviews: String[],
     public userImg: String,
-    public likes:String[],
+    public like_count:Number,
     public dateCreated: Date
     ) { }
 }
