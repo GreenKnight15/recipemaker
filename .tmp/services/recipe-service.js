@@ -31,6 +31,20 @@ export var RecipeService = (function () {
             .subscribe(function (res) {
         }, function (error) { return console.log(error); });
     };
+    RecipeService.prototype.likeRecipe = function (id) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authHttp.post(this.url + '/api/recipe/like', { Id: id }, { headers: headers })
+            .subscribe(function (res) {
+        }, function (error) { return console.log(error); });
+    };
+    RecipeService.prototype.unlikeRecipe = function (id) {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.authHttp.post(this.url + '/api/recipe/unlike', { Id: id }, { headers: headers })
+            .subscribe(function (res) {
+        }, function (error) { return console.log(error); });
+    };
     RecipeService.prototype.lazySearchByCategory = function (catagoryId, page, perPage) {
         var _this = this;
         console.log("lazySearchByCategory" + catagoryId);

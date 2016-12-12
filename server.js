@@ -95,7 +95,7 @@ var Recipe = mongoose.model('Recipe');
         // use mongoose to get all reviews in the database
         User.findOne(
             {
-                user_id:id,
+                userId:id,
             }
         )
         .exec(function(err, user) {

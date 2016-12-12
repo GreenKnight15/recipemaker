@@ -450,7 +450,7 @@ var _View_YourRecipes1 = (function (_super) {
                 this._el_24,
                 this._text_26
             ])], null);
-        this._text_27 = this.renderer.createText(this._el_18, '\n                ', null);
+        this._text_27 = this.renderer.createText(this._el_18, 'S\n                ', null);
         this._text_28 = this.renderer.createText(this._el_16, '\n                ', null);
         this._el_29 = this.renderer.createElement(this._el_16, 'ion-col', null);
         this._Col_29_3 = new import48.Wrapper_Col();
@@ -775,7 +775,7 @@ var _View_YourRecipes1 = (function (_super) {
             this.renderer.setElementClass(this._el_22, 'hide', currVal_6);
             this._expr_6 = currVal_6;
         }
-        var currVal_7 = import4.interpolate(1, '', this.context.$implicit.likes.length, ' Likes');
+        var currVal_7 = import4.interpolate(1, '', this.context.$implicit.like_count, ' Likes');
         if (import4.checkBinding(throwOnChange, this._expr_7, currVal_7)) {
             this.renderer.setText(this._text_25, currVal_7);
             this._expr_7 = currVal_7;

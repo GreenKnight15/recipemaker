@@ -28,10 +28,28 @@ export class RecipeService {
     });
   }
 
-  saveRecipe(recipe:Recipe, callback){
+  public saveRecipe(recipe:Recipe, callback){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.authHttp.post(this.url+'/api/recipe', JSON.stringify(recipe), {headers: headers})
+      .subscribe(res => {
+      }, error => console.log(error)
+     );
+  }
+
+  public likeRecipe(id){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.authHttp.post(this.url+'/api/recipe/like', {Id:id}, {headers: headers})
+      .subscribe(res => {
+      }, error => console.log(error)
+     );
+  }
+
+  public unlikeRecipe(id){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.authHttp.post(this.url+'/api/recipe/unlike', {Id:id}, {headers: headers})
       .subscribe(res => {
       }, error => console.log(error)
      );

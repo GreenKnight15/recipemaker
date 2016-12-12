@@ -553,7 +553,7 @@ class _View_YourRecipes1 extends import1.AppView<any> {
         this._text_26
       ]
     )],(null as any));
-    this._text_27 = this.renderer.createText(this._el_18,'\n                ',(null as any));
+    this._text_27 = this.renderer.createText(this._el_18,'S\n                ',(null as any));
     this._text_28 = this.renderer.createText(this._el_16,'\n                ',(null as any));
     this._el_29 = this.renderer.createElement(this._el_16,'ion-col',(null as any));
     this._Col_29_3 = new import48.Wrapper_Col();
@@ -827,7 +827,7 @@ class _View_YourRecipes1 extends import1.AppView<any> {
       this.renderer.setElementClass(this._el_22,'hide',currVal_6);
       this._expr_6 = currVal_6;
     }
-    const currVal_7:any = import4.interpolate(1,'',this.context.$implicit.likes.length,' Likes');
+    const currVal_7:any = import4.interpolate(1,'',this.context.$implicit.like_count,' Likes');
     if (import4.checkBinding(throwOnChange,this._expr_7,currVal_7)) {
       this.renderer.setText(this._text_25,currVal_7);
       this._expr_7 = currVal_7;
