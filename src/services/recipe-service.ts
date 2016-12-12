@@ -16,9 +16,6 @@ export class RecipeService {
   }
  
   getUserRecipes(id){
-    if (this.data) {
-      return Promise.resolve(this.data);
-    }
     return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/getRecipes/' + id)
         .map(res => res.json())
