@@ -52,6 +52,17 @@ var Recipe = mongoose.model('Recipe');
 
     })
     
+    app.post('/api/recipe', function(req, res) {
+        console.log('saving recipe:'+req.body)
+        var query = {};  
+        var recipe = req.body;
+        Recipe.findOneAndUpdate(query, recipe,function(err, recipe) {
+            if (err)
+                return res.send(500, { error: err });
+        });
+    });
+ 
+    
     // Get user by user id
     app.get('/api/getuser/:id', function(req, res) {        
         var id = req.param('id');
@@ -121,16 +132,6 @@ var Recipe = mongoose.model('Recipe');
         });
     });
     
- 
-    app.post('/api/recipe', function(req, res) {
-        console.log('saving recipe:'+req.body)
-        var query = {'Id':req.body.Id};  
-        var recipe = req.body;
-        Recipe.findOneAndUpdate(query, recipe,function(err, recipe) {
-            if (err)
-                return res.send(500, { error: err });
-        });
-    });
  
 //    // delete a review
 //    app.delete('/api/reviews/:review_id', function(req, res) {
