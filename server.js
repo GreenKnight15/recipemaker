@@ -68,13 +68,21 @@ var Recipe = mongoose.model('Recipe');
     });
 
     app.post('/api/recipe/like',function(req, res){
-        var id = req.body.Id;
-        Recipe.findOneAndUpdate({Id:id},{$inc:{ like_count:1 }})
+        var recipeId = req.body.RecipeId;
+        var userId = req.body.UserId;
+
+        Recipe.findOneAndUpdate({Id:recipeId},{$inc:{ like_count:1 }})
         .exec(function(err, db_res) { 
                 if (err)
                     console.log(err);
                     return res.send(500, { error: err });
-            }) 
+            });
+        
+        User.update( {user_id: userId}, { $addToSet:{ likes:recipeId } } )        .exec(function(err, db_res) { 
+                if (err)
+                    console.log(err);
+                    return res.send(500, { error: err });
+            });
     })
 
     app.post('/api/recipe/unlike',function(req, res){
@@ -85,6 +93,12 @@ var Recipe = mongoose.model('Recipe');
                     console.log(err);
                     return res.send(500, { error: err });
             }) 
+        
+        User.update( {user_id: userId}, { $pullAll: {_id: [recipeId] } } )        .exec(function(err, db_res) { 
+            if (err)
+                console.log(err);
+                return res.send(500, { error: err });
+        });
     })
  
     

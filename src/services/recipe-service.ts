@@ -37,19 +37,19 @@ export class RecipeService {
      );
   }
 
-  public likeRecipe(id){
+  public likeRecipe(recipeId,userId){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.authHttp.post(this.url+'/api/recipe/like', {Id:id}, {headers: headers})
+    this.authHttp.post(this.url+'/api/recipe/like', {RecipeId:recipeId,UserId:userId}, {headers: headers})
       .subscribe(res => {
       }, error => console.log(error)
      );
   }
 
-  public unlikeRecipe(id){
+  public unlikeRecipe(recipeId,userId){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.authHttp.post(this.url+'/api/recipe/unlike', {Id:id}, {headers: headers})
+    this.authHttp.post(this.url+'/api/recipe/unlike', {RecipeId:recipeId,UserId:userId}, {headers: headers})
       .subscribe(res => {
       }, error => console.log(error)
      );

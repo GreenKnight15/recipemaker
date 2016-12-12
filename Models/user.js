@@ -24,7 +24,8 @@ var User = new Schema({
     user_id:String,
     email: String,
     admin: Boolean,
-    dateCreated: Date
+    dateCreated: Date,
+    likes:[String]
 });
 
 exports = mongoose.model('User', User);

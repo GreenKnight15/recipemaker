@@ -31,36 +31,71 @@ export class ExploreDetail implements OnInit{
     }
     
     public recipes = []; 
+    myUser;
+    userLikes;
     
      ngOnInit(){
-         this.categoryId = this.navParams.get('categoryId');
-         this.categoryName = Catagories[this.categoryId].name;
-
-         this.page = 0;
-         this.perPage = 10;
-        
-       this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
+        this.categoryId = this.navParams.get('categoryId');
+        this.categoryName = Catagories[this.categoryId].name;
+        this.page = 0;
+        this.perPage = 10;
+         this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
         .then((data) => { 
           this.recipes.push(data);
       })
      }
+    
+    ionViewDidLoad() {
+        this.init();
+    }
+    
+    init(){
+        this.myUser = this.auth.myUser;
+        this.userLikes = this.myUser.likes;
+        console.log(this.userLikes);
+
+    }
+    
+    compareUserLikesToList(listIndex){
+        for(var i=0; i< this.recipes[listIndex]; i++){
+            for(var j=0; j< this.userLikes; j++){
+                if(this.recipes[listIndex][i]._id === this.userLikes[j]){
+                    this.recipes[listIndex][i].likedByUser = true;
+                }
+            }
+        }
+    }
     
     onScrollEnd(){
         this.page++;                 
         this.recipeService.lazySearchByCategory(this.categoryId,this.page,this.perPage)
         .then((data) => { 
         this.recipes.push(data);
+        this.compareUserLikesToList(this.page);
       })
     } 
     
-    like(id,index){
-        this.recipeService.likeRecipe(id);
-        this.recipes[index].like_count++;
-    }
-    dislike(id,index){
-        this.recipeService.unlikeRecipe(id);
-        this.recipes[index].like_count--;
+    like(id,index1,index2){
+        console.log(id,index1,index2);
+        this.recipeService.likeRecipe(id,this.myUser.user_id);
+         setTimeout( () => {
+             // update your data
+             this.recipes[index1][index2].like_count++;
+             this.recipes[index1][index2].likedByUser = true;
 
+         },100)
+         console.log(this.recipes[index1][index2]);
+    }
+    
+    unlike(id,index1,index2){
+        console.log(id,index1,index2);
+        this.recipeService.unlikeRecipe(id,this.myUser.user_id);
+         setTimeout( () => {
+             // update your data
+             this.recipes[index1][index2].like_count--;
+             this.recipes[index1][index2].likedByUser = false;
+
+         },100)
     }
     
     
