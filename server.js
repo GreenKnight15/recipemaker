@@ -56,7 +56,7 @@ var Recipe = mongoose.model('Recipe');
         console.log('saving recipe:'+req.body)
         var query = {};  
         var recipe = req.body;
-        Recipe.findOneAndUpdate(query, recipe,function(err, recipe) {
+        Recipe.findOneAndUpdate(query, recipe, {upsert:true},function(err, recipe) {
             if (err)
                 return res.send(500, { error: err });
         });

@@ -28,7 +28,7 @@ export class RecipeService {
     });
   }
 
-  saveRecipe(recipe:Recipe, callback){
+  public saveRecipe(recipe:Recipe, callback){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.authHttp.post(this.url+'/api/recipe', JSON.stringify(recipe), {headers: headers})
