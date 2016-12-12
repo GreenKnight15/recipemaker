@@ -63,7 +63,7 @@ export class ExploreDetail implements OnInit{
     init(){
         this.userLikes = this.myUser.likes;
         console.log(this.userLikes);
-
+        this.compareUserLikesToList(this.page);
     }
     
     compareUserLikesToList(listIndex){
