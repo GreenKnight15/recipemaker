@@ -1,3 +1,2 @@
-//export const URL: 'https://dishdesigner.herokuapp.com';
-export var URL = 'https://localhost:8100';
+export var URL = 'https://dishdesigner.herokuapp.com';
 //# sourceMappingURL=url.js.map
