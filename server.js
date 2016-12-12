@@ -91,7 +91,7 @@ var Recipe = mongoose.model('Recipe');
         var recipeId = req.body.RecipeId;
         var userId = req.body.UserId;
 
-        Recipe.findOneAndUpdate({_id:recipeId},{$dec:{ like_count:1 }})
+        Recipe.findOneAndUpdate({_id:recipeId},{$inc:{ like_count:-1 }})
         .exec(function(err, db_res) { 
                 if (err){
                     console.log(err);

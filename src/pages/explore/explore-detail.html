@@ -9,21 +9,21 @@
 
 
 <ion-content padding>
-    <ion-list *ngFor="let list of recipes; let i1 = index;">
-        <ion-item *ngFor="let item of list; let i2 = index;" >
+    <ion-list >
+        <ion-item *ngFor="let item of recipes; let i = index;" >
             <ion-grid>
             <ion-row>
                 <ion-col width-80 (click)="recipeSelected(item)">
                     <h1>{{item.title}}</h1>
                 </ion-col> 
                 <ion-col width-20 *ngIf="!item.likedByUser">
-                    <button ion-button type="button" (click)="like(item._id,i1,i2)">
+                    <button ion-button type="button" (click)="like(item._id,i)">
                     <ion-icon name="thumbs-up"></ion-icon>
                         {{ item.like_count}}
                     </button>
                 </ion-col>
                 <ion-col width-20 *ngIf="item.likedByUser">
-                    <button ion-button type="button" color="danger" (click)="unlike(item._id,i1,i2)">
+                    <button ion-button type="button" color="danger" (click)="unlike(item._id,i)">
                     <ion-icon name="thumbs-down"></ion-icon>
                         {{ item.like_count}}
                     </button>
