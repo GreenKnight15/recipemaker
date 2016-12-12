@@ -52,18 +52,19 @@ export class ExploreDetail implements OnInit{
 
             this.storage.set('myUser', JSON.stringify(data));
           });
+        this.myUser = this.auth.myUser;
+        this.userLikes = this.myUser.likes;
+        console.log(this.userLikes);
+        this.compareUserLikesToList(this.page);
      }
     
     ionViewDidLoad() {
-        this.myUser = this.auth.myUser;
         console.log(this.myUser);
         this.init();
     }
     
     init(){
-        this.userLikes = this.myUser.likes;
-        console.log(this.userLikes);
-        this.compareUserLikesToList(this.page);
+
     }
     
     compareUserLikesToList(listIndex){
