@@ -21,10 +21,10 @@ export class YourRecipes implements OnInit{
 
     user:User;
     r:Recipe;
+    userRecipes; 
+
     
   constructor(public navCtrl: NavController,private recipeService: RecipeService, public auth: AuthService,public modalCtrl: ModalController) {}
-
-  public userRecipes = []; 
     
   ionViewDidLoad() {
   }

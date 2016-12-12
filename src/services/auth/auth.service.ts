@@ -8,10 +8,11 @@ import { User } from '../../models/user'
 declare var Auth0: any;
 declare var Auth0Lock: any;
 import { Http, Headers } from '@angular/http';
+import { URL } from '../../app/url';
 
 @Injectable()
 export class AuthService {
-  url = 'https://dishdesigner.herokuapp.com';
+  url = URL;
   jwtHelper: JwtHelper = new JwtHelper();
   auth0 = new Auth0({clientID: 'umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', domain: 'recipemaker.auth0.com' });
   lock = new Auth0Lock('umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', 'recipemaker.auth0.com', {

@@ -43,8 +43,6 @@ export class ExploreDetail implements OnInit{
         .then((data) => { 
           this.recipes.push(data);
       })
-         
-        console.log(this.recipes);
      }
     
     onScrollEnd(){

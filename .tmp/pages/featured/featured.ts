@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import { NavController, MenuController  } from 'ionic-angular';
 import { User } from '../../models/user';
 
+
 @Component({
   selector: 'page-featured',
   templateUrl: 'featured.html'
@@ -14,7 +15,7 @@ export class Featured implements OnInit {
     userName:String;
     authenticated;
   constructor(public navCtrl: NavController,public auth: AuthService, public menuCtrl: MenuController) {
-            this.user = this.auth.user
+        this.user = this.auth.user
         this.myUser = this.auth.myUser;
         this.authenticated = this.auth.authenticated();
   }

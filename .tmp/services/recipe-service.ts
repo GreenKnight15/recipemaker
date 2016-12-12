@@ -4,34 +4,31 @@ import 'rxjs/add/operator/map';
 import {AuthHttp} from 'angular2-jwt';
 import {AuthService} from './auth/auth.service';
 import { Recipe } from '../models/recipe';
- 
+ import { URL } from '../app/url';
+
 @Injectable()
 export class RecipeService {
     
   data: any;
-  url = 'https://dishdesigner.herokuapp.com';
+  url = URL;
 
   constructor(private http: Http, private authHttp: AuthHttp, public auth: AuthService) {
-    this.data = null;
+    this.data = null ;
   }
  
   getUserRecipes(id){
-    if (this.data) {
-      return Promise.resolve(this.data);
-    }
+      console.log('getUserRecipes:'+id);
     return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/getRecipes/' + id)
         .map(res => res.json())
         .subscribe(data => {
-          this.data = data
-          resolve(this.data);
+          console.log(data)
+          resolve(data);
         });
     });
   }
 
-  createRecipe(recipe:Recipe){
-    console.log("inside createRecipe");
-    console.log(recipe);
+  createRecipe(recipe:Recipe, callback){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.authHttp.post(this.url+'/api/recipe', JSON.stringify(recipe), {headers: headers})
@@ -41,13 +38,13 @@ export class RecipeService {
   }
     
   lazySearchByCategory(catagoryId, page, perPage){
-      console.log(catagoryId, page, perPage);
-    return new Promise(resolve => {
+      console.log("lazySearchByCategory"+catagoryId)
+      return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/category/'+catagoryId+'/'+page+'/'+perPage)
         .map(res => res.json())
         .subscribe(data => {
-          this.data = data
-          resolve(this.data);
+          console.log(data)
+          resolve(data);
         });
     });
   }

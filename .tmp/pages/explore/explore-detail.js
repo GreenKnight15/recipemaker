@@ -25,7 +25,6 @@ export var ExploreDetail = (function () {
             .then(function (data) {
             _this.recipes.push(data);
         });
-        console.log(this.recipes);
     };
     ExploreDetail.prototype.onScrollEnd = function () {
         var _this = this;

@@ -89,13 +89,21 @@ export class CreateRecipe implements OnInit{
     save(model: Recipe, isValid: boolean): void{
       model.ingredients = this.ingredients;
       model.steps = this.steps;
-      model.userId = this.user.identities[0].user_id;
+      model.userId = this.user.user_id;
       model.dateCreated = new Date();
 
       console.log(model);
       if(isValid){  
-        this.recipeService.createRecipe(model);
-        this.navCtrl.setRoot(YourRecipes);
+        this.recipeService.createRecipe(model,function(){
+        //pop up saved
+        //clear fields
+        console.log('saved');
+        this.ingredients = [];
+        this.ingredientTxt = '';
+        this.stepTxt ='';
+        this.steps = [];
+        this.recipeForm = null; 
+        });
       }
   }
     

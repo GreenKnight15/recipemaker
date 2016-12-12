@@ -3,11 +3,12 @@ import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Headers } from '@angular/http';
+import { URL } from '../../app/url';
 export var AuthService = (function () {
     function AuthService(authHttp, zone) {
         var _this = this;
         this.authHttp = authHttp;
-        this.url = 'https://dishdesigner.herokuapp.com';
+        this.url = URL;
         this.jwtHelper = new JwtHelper();
         this.auth0 = new Auth0({ clientID: 'umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', domain: 'recipemaker.auth0.com' });
         this.lock = new Auth0Lock('umeSwTUlyXl4YSxFWjSNr6T83DpqkzHt', 'recipemaker.auth0.com', {

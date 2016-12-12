@@ -4,15 +4,16 @@ import 'rxjs/add/operator/map';
 import {AuthHttp} from 'angular2-jwt';
 import {AuthService} from './auth/auth.service';
 import { Recipe } from '../models/recipe';
- 
+ import { URL } from '../app/url';
+
 @Injectable()
 export class RecipeService {
     
   data: any;
-  url = 'https://dishdesigner.herokuapp.com';
+  url = URL;
 
   constructor(private http: Http, private authHttp: AuthHttp, public auth: AuthService) {
-    this.data = null;
+    this.data = null ;
   }
  
   getUserRecipes(id){
