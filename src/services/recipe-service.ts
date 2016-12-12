@@ -20,15 +20,12 @@ export class RecipeService {
       this.authHttp.get(this.url+'/api/getRecipes/' + id)
         .map(res => res.json())
         .subscribe(data => {
-          this.data = data
-          resolve(this.data);
+          resolve(data);
         });
     });
   }
 
   createRecipe(recipe:Recipe, callback){
-    console.log("inside createRecipe");
-    console.log(recipe);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.authHttp.post(this.url+'/api/recipe', JSON.stringify(recipe), {headers: headers})
@@ -43,8 +40,7 @@ export class RecipeService {
       this.authHttp.get(this.url+'/api/category/'+catagoryId+'/'+page+'/'+perPage)
         .map(res => res.json())
         .subscribe(data => {
-          this.data = data
-          resolve(this.data);
+          resolve(data);
         });
     });
   }
