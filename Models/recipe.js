@@ -16,7 +16,8 @@ var Recipe = new Schema({
     dateCreated: Date,
     like_count:Number,
     category:[Number],
-    userImg:String
+    userImg:String.
+    username:String
 });
 
 

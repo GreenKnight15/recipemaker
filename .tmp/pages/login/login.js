@@ -1,6 +1,7 @@
 import { AuthService } from '../../services/auth/auth.service';
 import { Component, Injectable } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Featured } from '../featured/featured';
 export var Login = (function () {
     // We need to inject AuthService so that we can
     // use it in the view
@@ -15,6 +16,9 @@ export var Login = (function () {
         this.init();
     };
     Login.prototype.init = function () {
+        if (this.auth.authenticated()) {
+            this.navCtrl.setRoot(Featured);
+        }
     };
     Login.decorators = [
         { type: Component, args: [{

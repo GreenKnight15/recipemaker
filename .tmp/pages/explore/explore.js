@@ -17,7 +17,6 @@ export var Explore = (function () {
     Explore.prototype.ionViewDidLoad = function () {
     };
     Explore.prototype.selectCategory = function (id) {
-        console.log(id);
         this.navCtrl.push(ExploreDetail, { categoryId: id });
     };
     Explore.decorators = [

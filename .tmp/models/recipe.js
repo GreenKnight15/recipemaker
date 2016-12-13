@@ -1,5 +1,5 @@
 export var Recipe = (function () {
-    function Recipe(Id, title, userId, description, ingredients, steps, meal, category, imageUrl, reviews, userImg, like_count, dateCreated) {
+    function Recipe(Id, title, userId, description, ingredients, steps, meal, category, imageUrl, reviews, userImg, like_count, dateCreated, likedByUser, username) {
         this.Id = Id;
         this.title = title;
         this.userId = userId;
@@ -13,6 +13,8 @@ export var Recipe = (function () {
         this.userImg = userImg;
         this.like_count = like_count;
         this.dateCreated = dateCreated;
+        this.likedByUser = likedByUser;
+        this.username = username;
     }
     return Recipe;
 }());

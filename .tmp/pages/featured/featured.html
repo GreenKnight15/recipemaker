@@ -1,23 +1,19 @@
 <ion-header >
   <ion-navbar bar bar-header>
-    <button  ion-button menuToggle *ngIf="auth.authenticated()">
+    <button  ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title >Featured </ion-title>
 
-    <ion-buttons right>
-        <button ion-button primary round logout-btn *ngIf="auth.authenticated()"  (click)="auth.logout()">Logout</button>
-    </ion-buttons>
-      
   </ion-navbar>
 </ion-header>
 
-<ion-content padding *ngIf="auth.authenticated()">
+<ion-content padding has-header>
 <ion-card width=50% center>
 
   <ion-item>
     <ion-avatar item-left *ngIf="auth.authenticated()">
-      <img height="50%" width="70%" src="{{ auth.user.picture }}" >
+      <img height="50%" width="70%" src="{{ myUser.picture }}" *ngIf="myUser">
     </ion-avatar>
     <h2>{{userName}}</h2>
     <p>November 5, 1955</p>
@@ -50,10 +46,6 @@
   </ion-row>
 
 </ion-card>
-    
-
-
-<ion-content padding *ngIf="!auth.authenticated()">
-  <button ion-button block (click)="auth.login()">Login</button>
 </ion-content>
+
 

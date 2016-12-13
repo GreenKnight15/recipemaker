@@ -14,7 +14,7 @@ import { Catagory } from '../../models/catagory';
 import { Catagories } from '../../models/catagories';
 import { RecipeDetails } from '../recipe-details/recipe-details'
 import { Storage } from '@ionic/storage';
-import { User } from '../../models/user'
+import { User } from '../../models/user';
 
 @Component({
   selector: 'page-explore-detail',

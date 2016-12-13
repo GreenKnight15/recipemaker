@@ -15,9 +15,11 @@ export class Featured implements OnInit {
     userName:String;
     authenticated;
   constructor(public navCtrl: NavController,public auth: AuthService, public menuCtrl: MenuController) {
-        this.user = this.auth.user
+    if(this.auth.authenticated()){
+        this.auth.getCurrentUser(this.auth.user.user_id);
         this.myUser = this.auth.myUser;
         this.authenticated = this.auth.authenticated();
+    }
   }
     
     ngOnInit(){
@@ -28,24 +30,13 @@ export class Featured implements OnInit {
         this.init();
     }
     
-    enableAuthenticatedMenu() {
-        this.menuCtrl.enable(true, 'authenticated');
-        this.menuCtrl.enable(false, 'unauthenticated');
-    }
-    disableAuthenticatedMenu() {
-            this.menuCtrl.enable(false, 'authenticated');
-            this.menuCtrl.enable(true, 'unauthenticated');
-    }
+
     
     init(){
         this.myUser = this.auth.myUser;
         this.userName = this.myUser.name;
         console.log(this.authenticated);
-        if(this.authenticated){
-            this.enableAuthenticatedMenu()
-        }else{
-            this.disableAuthenticatedMenu()
-        }
+
 
     }
 }

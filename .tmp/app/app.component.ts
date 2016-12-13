@@ -1,6 +1,6 @@
 import { Component, ViewChild, Injectable, NgZone } from '@angular/core';
 import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform, MenuController,LoadingController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Observable } from 'rxjs/Rx';
 import { Http, Headers } from '@angular/http';
@@ -55,7 +55,7 @@ export class MyApp {
   data:any;
   pagelogin:Login;
    
-  constructor(public platform: Platform, public menuCtrl: MenuController,private authHttp: AuthHttp, zone: NgZone,) {
+  constructor(public platform: Platform, public menuCtrl: MenuController,private authHttp: AuthHttp, zone: NgZone,public loadingCtrl: LoadingController) {
     this.initializeApp();
      platform.ready().then(() => {
           // Okay, so the platform is ready and our plugins are available.
@@ -63,21 +63,23 @@ export class MyApp {
           StatusBar.styleDefault();
           // Schedule a token refresh on app start up
           this.startupTokenRefresh();
-         
-//        if(this.auth.authenticated()){
+//         
+//        if(this.authenticated()){
 //            this.menuCtrl.enable(true, 'authenticated');
 //            this.menuCtrl.enable(false, 'unauthenticated');
 //        }else{
 //            this.menuCtrl.enable(false, 'authenticated');
 //            this.menuCtrl.enable(true, 'unauthenticated');
 //        }
-             this.zoneImpl = zone;
+         
+        this.zoneImpl = zone;
         this.data = null;
         // Check if there is a profile saved in local storage
         this.storage.get('profile').then(profile => {
           this.user = JSON.parse(profile);
           this.getCurrentUser(this.user.user_id).then((data:User) => { 
-            this.myUser = data
+            this.myUser = data;
+            this.storage.set('myUser', JSON.stringify(data));
           });
           this.upsertUser(this.user);
         }).catch(error => {
@@ -89,6 +91,7 @@ export class MyApp {
         });
 
         this.lock.on('authenticated', authResult => {
+            
           this.storage.set('id_token', authResult.idToken);
           this.idToken = authResult.idToken;
 
@@ -104,12 +107,10 @@ export class MyApp {
             this.storage.set('profile', JSON.stringify(profile));
             this.user = profile;
             this.getCurrentUser(this.user.user_id).then((data:User) => { 
-                this.myUser = data
+                this.myUser = data;
+                this.storage.set('myUser', JSON.stringify(data));
             });
           });
-         
-          this.nav.setRoot(Featured);
-
 
           this.lock.hide();
 
@@ -117,7 +118,9 @@ export class MyApp {
           this.zoneImpl.run(() => this.user = authResult.profile);
           // Schedule a token refresh
           this.scheduleRefresh(); 
-            
+         
+          this.nav.setRoot(Featured)
+          this.presentLoadingDefault(); 
         });
          
         });
@@ -132,7 +135,7 @@ export class MyApp {
     ];
       
   this.unAuthPages = [
-      { title: 'Login', component: Login },
+      { title: 'Featured', component: Featured },
     ];
 
   }
@@ -146,6 +149,10 @@ export class MyApp {
  
     });
   }
+   
+ opnFeatured(){
+     this.nav.setRoot(Featured);
+ }
 
   openPage(page) {
     // Reset the content nav to have just this page
@@ -168,12 +175,16 @@ export class MyApp {
   public logout() {
     this.storage.remove('profile');
     this.storage.remove('id_token');
+    this.storage.remove('myUser');
     this.idToken = null;
     this.storage.remove('refresh_token');
     this.zoneImpl.run(() => this.user = null);
     // Unschedule the token refresh
     this.unscheduleRefresh();
-      this.nav.pop();
+    this.nav.setRoot(Featured);
+
+              this.nav.setRoot(Featured)
+          this.presentLoadingDefault(); 
   }
     public scheduleRefresh() {
       // If the user is authenticated, use the token stream
@@ -272,4 +283,17 @@ export class MyApp {
             });
         });
     }
+   
+   presentLoadingDefault() {
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+
+      loading.present();
+
+      setTimeout(() => {
+        loading.dismiss();
+      }, 5000);
+    }
+
 }

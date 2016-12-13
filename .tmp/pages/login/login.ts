@@ -25,6 +25,8 @@ export class Login implements OnInit{
          this.init();
       }    
     init(){
-
+        if(this.auth.authenticated()){
+            this.navCtrl.setRoot(Featured);
+        }
     }
 }

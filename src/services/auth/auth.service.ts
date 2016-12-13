@@ -77,6 +77,7 @@ export class AuthService {
       this.zoneImpl.run(() => this.user = authResult.profile);
       // Schedule a token refresh
       this.scheduleRefresh(); 
+        
     });    
   }
 

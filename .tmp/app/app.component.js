@@ -1,22 +1,22 @@
 import { Component, ViewChild, Injectable, NgZone } from '@angular/core';
 import { AuthHttp, JwtHelper, tokenNotExpired } from 'angular2-jwt';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform, MenuController, LoadingController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Observable } from 'rxjs/Rx';
 import { Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { Featured } from '../pages/featured/featured';
 import { Profile } from '../pages/profile/profile';
-import { Login } from '../pages/login/login';
 import { Explore } from '../pages/explore/explore';
 import { CreateRecipe } from '../pages/create-recipe/create-recipe';
 import { YourRecipes } from '../pages/your-recipes/your-recipes';
 export var MyApp = (function () {
-    function MyApp(platform, menuCtrl, authHttp, zone) {
+    function MyApp(platform, menuCtrl, authHttp, zone, loadingCtrl) {
         var _this = this;
         this.platform = platform;
         this.menuCtrl = menuCtrl;
         this.authHttp = authHttp;
+        this.loadingCtrl = loadingCtrl;
         this.rootPage = Featured;
         this.url = 'https://dishdesigner.herokuapp.com';
         this.jwtHelper = new JwtHelper();
@@ -37,7 +37,8 @@ export var MyApp = (function () {
             StatusBar.styleDefault();
             // Schedule a token refresh on app start up
             _this.startupTokenRefresh();
-            //        if(this.auth.authenticated()){
+            //         
+            //        if(this.authenticated()){
             //            this.menuCtrl.enable(true, 'authenticated');
             //            this.menuCtrl.enable(false, 'unauthenticated');
             //        }else{
@@ -51,6 +52,7 @@ export var MyApp = (function () {
                 _this.user = JSON.parse(profile);
                 _this.getCurrentUser(_this.user.user_id).then(function (data) {
                     _this.myUser = data;
+                    _this.storage.set('myUser', JSON.stringify(data));
                 });
                 _this.upsertUser(_this.user);
             }).catch(function (error) {
@@ -74,14 +76,16 @@ export var MyApp = (function () {
                     _this.user = profile;
                     _this.getCurrentUser(_this.user.user_id).then(function (data) {
                         _this.myUser = data;
+                        _this.storage.set('myUser', JSON.stringify(data));
                     });
                 });
-                _this.nav.setRoot(Featured);
                 _this.lock.hide();
                 _this.storage.set('refresh_token', authResult.refreshToken);
                 _this.zoneImpl.run(function () { return _this.user = authResult.profile; });
                 // Schedule a token refresh
                 _this.scheduleRefresh();
+                _this.nav.setRoot(Featured);
+                _this.presentLoadingDefault();
             });
         });
         // used for an example of ngFor and navigation
@@ -93,7 +97,7 @@ export var MyApp = (function () {
             { title: 'Profile', component: Profile }
         ];
         this.unAuthPages = [
-            { title: 'Login', component: Login },
+            { title: 'Featured', component: Featured },
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -103,6 +107,9 @@ export var MyApp = (function () {
             StatusBar.styleDefault();
             Splashscreen.hide();
         });
+    };
+    MyApp.prototype.opnFeatured = function () {
+        this.nav.setRoot(Featured);
     };
     MyApp.prototype.openPage = function (page) {
         // Reset the content nav to have just this page
@@ -123,12 +130,15 @@ export var MyApp = (function () {
         var _this = this;
         this.storage.remove('profile');
         this.storage.remove('id_token');
+        this.storage.remove('myUser');
         this.idToken = null;
         this.storage.remove('refresh_token');
         this.zoneImpl.run(function () { return _this.user = null; });
         // Unschedule the token refresh
         this.unscheduleRefresh();
-        this.nav.pop();
+        this.nav.setRoot(Featured);
+        this.nav.setRoot(Featured);
+        this.presentLoadingDefault();
     };
     MyApp.prototype.scheduleRefresh = function () {
         // If the user is authenticated, use the token stream
@@ -216,6 +226,15 @@ export var MyApp = (function () {
             });
         });
     };
+    MyApp.prototype.presentLoadingDefault = function () {
+        var loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        loading.present();
+        setTimeout(function () {
+            loading.dismiss();
+        }, 5000);
+    };
     MyApp.decorators = [
         { type: Component, args: [{
                     templateUrl: 'app.html'
@@ -228,6 +247,7 @@ export var MyApp = (function () {
         { type: MenuController, },
         { type: AuthHttp, },
         { type: NgZone, },
+        { type: LoadingController, },
     ];
     MyApp.propDecorators = {
         'nav': [{ type: ViewChild, args: [Nav,] },],

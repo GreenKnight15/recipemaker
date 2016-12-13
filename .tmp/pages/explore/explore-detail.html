@@ -10,8 +10,26 @@
 
 <ion-content padding>
     <ion-list >
-        <ion-item *ngFor="let i of recipes[0]" (click)="recipeSelected(i)">
-            <h1>{{i.title}}</h1>
+        <ion-item *ngFor="let item of recipes; let i = index;" >
+            <ion-grid>
+            <ion-row>
+                <ion-col width-80 (click)="recipeSelected(item)">
+                    <h1>{{item.title}}</h1>
+                </ion-col> 
+                <ion-col width-20 *ngIf="!item.likedByUser">
+                    <button ion-button type="button" (click)="like(item._id,i)">
+                    <ion-icon name="thumbs-up"></ion-icon>
+                        {{ item.like_count}}
+                    </button>
+                </ion-col>
+                <ion-col width-20 *ngIf="item.likedByUser">
+                    <button ion-button type="button" color="danger" (click)="unlike(item._id,i)">
+                    <ion-icon name="thumbs-down"></ion-icon>
+                        {{ item.like_count}}
+                    </button>
+                </ion-col>
+            </ion-row>
+            </ion-grid>
         </ion-item>
     </ion-list>
 </ion-content>

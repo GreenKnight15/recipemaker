@@ -29,7 +29,6 @@ catagories = Catagories;
     }
     
     selectCategory(id){
-        console.log(id);
         this.navCtrl.push(ExploreDetail,{categoryId:id})
     }
     

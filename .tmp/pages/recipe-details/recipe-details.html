@@ -1,16 +1,33 @@
-<ion-header>
-  <ion-navbar  class="bar-positive" align-title="center">
-    <ion-buttons start>
-        <button ion-button (click)='dismiss()'>
-            Close
-        </button>
-    </ion-buttons>
-    <ion-title right >{{recipe.title}}</ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding >
-    <img href=" recipe.imageUrl " />
+
+<ion-content  >
+<ion-card width=75% center>
+  <ion-item>
+      <ion-grid>
+          <ion-row>
+              <ion-col width-10>
+                <ion-avatar item-left *ngIf="recipe.userImg">
+                  <img height="50%" width="70%" src="{{ recipe.userImg }}" >
+                </ion-avatar>
+                <p *ngIf="recipe.username" >{{recipe.username}}</p>
+              </ion-col>
+              <ion-col width-70>
+                <h1>{{recipe.title}}</h1>
+                <p>{{recipe.dateCreated}}</p>
+              </ion-col>
+              <ion-col width-20>
+                  <ion-buttons end>
+                    <button ion-button (click)='dismiss()'>Close</button>
+                </ion-buttons>
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  <img src="http://ilovegarciniacambogia.net/wp-content/uploads/2014/02/fast-food.jpg" *ngIf="!recipe.imageUrl" >
+  <img href=" recipe.imageUrl " *ngIf="recipe.imageUrl" />
+
+  <ion-card-content>
     <h1>{{recipe.description}}</h1>
     <ion-grid>
         <ion-row>
@@ -32,5 +49,8 @@
             </ion-col>
         </ion-row>
     </ion-grid>
+ </ion-card-content>
+</ion-card>
+    
     
 </ion-content>

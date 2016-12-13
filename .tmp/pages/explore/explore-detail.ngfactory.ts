@@ -52,9 +52,13 @@ import * as import44 from '@angular/common/src/directives/ng_for';
 import * as import45 from 'ionic-angular/components/list/list';
 import * as import46 from 'ionic-angular/components/content/content';
 import * as import47 from '../../node_modules/ionic-angular/components/item/item.ngfactory';
-import * as import48 from 'ionic-angular/util/form';
-import * as import49 from 'ionic-angular/components/item/item-reorder';
-import * as import50 from 'ionic-angular/components/item/item';
+import * as import48 from '../../node_modules/ionic-angular/components/grid/grid.ngfactory';
+import * as import49 from '../../node_modules/@angular/common/src/directives/ng_if.ngfactory';
+import * as import50 from 'ionic-angular/util/form';
+import * as import51 from 'ionic-angular/components/item/item-reorder';
+import * as import52 from 'ionic-angular/components/grid/grid';
+import * as import53 from '@angular/common/src/directives/ng_if';
+import * as import54 from 'ionic-angular/components/item/item';
 export class Wrapper_ExploreDetail {
   context:import0.ExploreDetail;
   changed:boolean;
@@ -301,7 +305,7 @@ class _View_ExploreDetail0 extends import1.AppView<import0.ExploreDetail> {
     if (this._ToolbarTitle_9_4.detectChangesInternal(this,this._el_9,throwOnChange)) { this._appEl_9.componentView.markAsCheckOnce(); }
     if (this._Content_14_4.detectChangesInternal(this,this._el_14,throwOnChange)) { this._appEl_14.componentView.markAsCheckOnce(); }
     this._List_16_3.detectChangesInternal(this,this._el_16,throwOnChange);
-    const currVal_9:any = this.context.recipes[0];
+    const currVal_9:any = this.context.recipes;
     this._NgFor_18_6.check_ngForOf(currVal_9,throwOnChange,false);
     this._NgFor_18_6.detectChangesInternal(this,this._anchor_18,throwOnChange);
     this.detectContentChildrenChanges(throwOnChange);
@@ -370,8 +374,30 @@ class _View_ExploreDetail1 extends import1.AppView<any> {
   _query_Icon_0_2:import20.QueryList<any>;
   _text_1:any;
   _el_2:any;
+  _Grid_2_3:import48.Wrapper_Grid;
   _text_3:any;
-  _text_4:any;
+  _el_4:any;
+  _Row_4_3:import48.Wrapper_Row;
+  _text_5:any;
+  _el_6:any;
+  _Col_6_3:import48.Wrapper_Col;
+  _text_7:any;
+  _el_8:any;
+  _text_9:any;
+  _text_10:any;
+  _text_11:any;
+  _anchor_12:any;
+  /*private*/ _appEl_12:import3.AppElement;
+  _TemplateRef_12_5:any;
+  _NgIf_12_6:import49.Wrapper_NgIf;
+  _text_13:any;
+  _anchor_14:any;
+  /*private*/ _appEl_14:import3.AppElement;
+  _TemplateRef_14_5:any;
+  _NgIf_14_6:import49.Wrapper_NgIf;
+  _text_15:any;
+  _text_16:any;
+  _text_17:any;
   /*private*/ _expr_1:any;
   constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import3.AppElement) {
     super(_View_ExploreDetail1,renderType_ExploreDetail,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
@@ -381,16 +407,39 @@ class _View_ExploreDetail1 extends import1.AppView<any> {
     this.renderer.setElementAttribute(this._el_0,'class','item item-block');
     this._appEl_0 = new import3.AppElement(0,(null as any),this,this._el_0);
     var compView_0:any = import47.viewFactory_Item0(this.viewUtils,this.injector(0),this._appEl_0);
-    this._Item_0_4 = new import47.Wrapper_Item(this.parent.parentInjector.get(import48.Form),this.parent.parentInjector.get(import26.Config),new import27.ElementRef(this._el_0),this.renderer,this.parent.parentInjector.get(import49.ItemReorder,(null as any)));
+    this._Item_0_4 = new import47.Wrapper_Item(this.parent.parentInjector.get(import50.Form),this.parent.parentInjector.get(import26.Config),new import27.ElementRef(this._el_0),this.renderer,this.parent.parentInjector.get(import51.ItemReorder,(null as any)));
     this._ItemContent_0_5 = new import47.Wrapper_ItemContent();
     this._query_Label_0_0 = new import20.QueryList<any>();
     this._query_Button_0_1 = new import20.QueryList<any>();
     this._query_Icon_0_2 = new import20.QueryList<any>();
     this._appEl_0.initComponent(this._Item_0_4.context,([] as any[]),compView_0);
     this._text_1 = this.renderer.createText((null as any),'\n            ',(null as any));
-    this._el_2 = this.renderer.createElement((null as any),'h1',(null as any));
-    this._text_3 = this.renderer.createText(this._el_2,'',(null as any));
-    this._text_4 = this.renderer.createText((null as any),'\n        ',(null as any));
+    this._el_2 = this.renderer.createElement((null as any),'ion-grid',(null as any));
+    this._Grid_2_3 = new import48.Wrapper_Grid();
+    this._text_3 = this.renderer.createText(this._el_2,'\n            ',(null as any));
+    this._el_4 = this.renderer.createElement(this._el_2,'ion-row',(null as any));
+    this._Row_4_3 = new import48.Wrapper_Row();
+    this._text_5 = this.renderer.createText(this._el_4,'\n                ',(null as any));
+    this._el_6 = this.renderer.createElement(this._el_4,'ion-col',(null as any));
+    this.renderer.setElementAttribute(this._el_6,'width-80','');
+    this._Col_6_3 = new import48.Wrapper_Col();
+    this._text_7 = this.renderer.createText(this._el_6,'\n                    ',(null as any));
+    this._el_8 = this.renderer.createElement(this._el_6,'h1',(null as any));
+    this._text_9 = this.renderer.createText(this._el_8,'',(null as any));
+    this._text_10 = this.renderer.createText(this._el_6,'\n                ',(null as any));
+    this._text_11 = this.renderer.createText(this._el_4,' \n                ',(null as any));
+    this._anchor_12 = this.renderer.createTemplateAnchor(this._el_4,(null as any));
+    this._appEl_12 = new import3.AppElement(12,4,this,this._anchor_12);
+    this._TemplateRef_12_5 = new import36.TemplateRef_(this._appEl_12,viewFactory_ExploreDetail2);
+    this._NgIf_12_6 = new import49.Wrapper_NgIf(this._appEl_12.vcRef,this._TemplateRef_12_5);
+    this._text_13 = this.renderer.createText(this._el_4,'\n                ',(null as any));
+    this._anchor_14 = this.renderer.createTemplateAnchor(this._el_4,(null as any));
+    this._appEl_14 = new import3.AppElement(14,4,this,this._anchor_14);
+    this._TemplateRef_14_5 = new import36.TemplateRef_(this._appEl_14,viewFactory_ExploreDetail3);
+    this._NgIf_14_6 = new import49.Wrapper_NgIf(this._appEl_14.vcRef,this._TemplateRef_14_5);
+    this._text_15 = this.renderer.createText(this._el_4,'\n            ',(null as any));
+    this._text_16 = this.renderer.createText(this._el_2,'\n            ',(null as any));
+    this._text_17 = this.renderer.createText((null as any),'\n        ',(null as any));
     this._query_Label_0_0.reset(([] as any[]));
     this._Item_0_4.context.contentLabel = this._query_Label_0_0.first;
     compView_0.create(this._Item_0_4.context,[
@@ -399,33 +448,62 @@ class _View_ExploreDetail1 extends import1.AppView<any> {
       ([] as any[]).concat([
         this._text_1,
         this._el_2,
-        this._text_4
+        this._text_17
       ]
       ),
       ([] as any[]),
       ([] as any[])
     ]
     ,(null as any));
-    var disposable_0:Function = this.renderer.listen(this._el_0,'click',this.eventHandler(this._handle_click_0_0.bind(this)));
+    var disposable_0:Function = this.renderer.listen(this._el_6,'click',this.eventHandler(this._handle_click_6_0.bind(this)));
     this._expr_1 = import7.UNINITIALIZED;
     this.init(([] as any[]).concat([this._el_0]),[
       this._el_0,
       this._text_1,
       this._el_2,
       this._text_3,
-      this._text_4
+      this._el_4,
+      this._text_5,
+      this._el_6,
+      this._text_7,
+      this._el_8,
+      this._text_9,
+      this._text_10,
+      this._text_11,
+      this._anchor_12,
+      this._text_13,
+      this._anchor_14,
+      this._text_15,
+      this._text_16,
+      this._text_17
     ]
     ,[disposable_0],([] as any[]));
     return (null as any);
   }
   injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
-    if (((token === import50.Item) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 4)))) { return this._Item_0_4.context; }
-    if (((token === import50.ItemContent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 4)))) { return this._ItemContent_0_5.context; }
+    if (((token === import52.Col) && ((6 <= requestNodeIndex) && (requestNodeIndex <= 10)))) { return this._Col_6_3.context; }
+    if (((token === import36.TemplateRef) && (12 === requestNodeIndex))) { return this._TemplateRef_12_5; }
+    if (((token === import53.NgIf) && (12 === requestNodeIndex))) { return this._NgIf_12_6.context; }
+    if (((token === import36.TemplateRef) && (14 === requestNodeIndex))) { return this._TemplateRef_14_5; }
+    if (((token === import53.NgIf) && (14 === requestNodeIndex))) { return this._NgIf_14_6.context; }
+    if (((token === import52.Row) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 15)))) { return this._Row_4_3.context; }
+    if (((token === import52.Grid) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 16)))) { return this._Grid_2_3.context; }
+    if (((token === import54.Item) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 17)))) { return this._Item_0_4.context; }
+    if (((token === import54.ItemContent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 17)))) { return this._ItemContent_0_5.context; }
     return notFoundResult;
   }
   detectChangesInternal(throwOnChange:boolean):void {
     if (this._Item_0_4.detectChangesInternal(this,this._el_0,throwOnChange)) { this._appEl_0.componentView.markAsCheckOnce(); }
     this._ItemContent_0_5.detectChangesInternal(this,this._el_0,throwOnChange);
+    this._Grid_2_3.detectChangesInternal(this,this._el_2,throwOnChange);
+    this._Row_4_3.detectChangesInternal(this,this._el_4,throwOnChange);
+    this._Col_6_3.detectChangesInternal(this,this._el_6,throwOnChange);
+    const currVal_2:boolean = !this.context.$implicit.likedByUser;
+    this._NgIf_12_6.check_ngIf(currVal_2,throwOnChange,false);
+    this._NgIf_12_6.detectChangesInternal(this,this._anchor_12,throwOnChange);
+    const currVal_3:any = this.context.$implicit.likedByUser;
+    this._NgIf_14_6.check_ngIf(currVal_3,throwOnChange,false);
+    this._NgIf_14_6.detectChangesInternal(this,this._anchor_14,throwOnChange);
     this.detectContentChildrenChanges(throwOnChange);
     if (!throwOnChange) {
       if (this._query_Button_0_1.dirty) {
@@ -442,12 +520,12 @@ class _View_ExploreDetail1 extends import1.AppView<any> {
     }
     const currVal_1:any = import4.interpolate(1,'',this.context.$implicit.title,'');
     if (import4.checkBinding(throwOnChange,this._expr_1,currVal_1)) {
-      this.renderer.setText(this._text_3,currVal_1);
+      this.renderer.setText(this._text_9,currVal_1);
       this._expr_1 = currVal_1;
     }
     this.detectViewChildrenChanges(throwOnChange);
   }
-  private _handle_click_0_0($event:any):boolean {
+  private _handle_click_6_0($event:any):boolean {
     this.markPathToRootAsCheckOnce();
     const pd_0:any = ((<any>this.parent.context.recipeSelected(this.context.$implicit)) !== false);
     return (true && pd_0);
@@ -455,4 +533,197 @@ class _View_ExploreDetail1 extends import1.AppView<any> {
 }
 function viewFactory_ExploreDetail1(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import3.AppElement):import1.AppView<any> {
   return new _View_ExploreDetail1(viewUtils,parentInjector,declarationEl);
+}
+class _View_ExploreDetail2 extends import1.AppView<any> {
+  _el_0:any;
+  _Col_0_3:import48.Wrapper_Col;
+  _text_1:any;
+  _el_2:any;
+  /*private*/ _appEl_2:import3.AppElement;
+  _Button_2_4:import17.Wrapper_Button;
+  _text_3:any;
+  _el_4:any;
+  _Icon_4_3:import21.Wrapper_Icon;
+  _text_5:any;
+  _text_6:any;
+  /*private*/ _expr_2:any;
+  /*private*/ _expr_3:any;
+  constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import3.AppElement) {
+    super(_View_ExploreDetail2,renderType_ExploreDetail,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+  }
+  createInternal(rootSelector:string):import3.AppElement {
+    this._el_0 = this.renderer.createElement((null as any),'ion-col',(null as any));
+    this.renderer.setElementAttribute(this._el_0,'width-20','');
+    this._Col_0_3 = new import48.Wrapper_Col();
+    this._text_1 = this.renderer.createText(this._el_0,'\n                    ',(null as any));
+    this._el_2 = this.renderer.createElement(this._el_0,'button',(null as any));
+    this.renderer.setElementAttribute(this._el_2,'ion-button','');
+    this.renderer.setElementAttribute(this._el_2,'type','button');
+    this._appEl_2 = new import3.AppElement(2,0,this,this._el_2);
+    var compView_2:any = import17.viewFactory_Button0(this.viewUtils,this.injector(2),this._appEl_2);
+    this._Button_2_4 = new import17.Wrapper_Button((null as any),'',this.parent.parent.parentInjector.get(import26.Config),new import27.ElementRef(this._el_2),this.renderer);
+    this._appEl_2.initComponent(this._Button_2_4.context,([] as any[]),compView_2);
+    this._text_3 = this.renderer.createText((null as any),'\n                    ',(null as any));
+    this._el_4 = this.renderer.createElement((null as any),'ion-icon',(null as any));
+    this.renderer.setElementAttribute(this._el_4,'name','thumbs-up');
+    this.renderer.setElementAttribute(this._el_4,'role','img');
+    this._Icon_4_3 = new import21.Wrapper_Icon(this.parent.parent.parentInjector.get(import26.Config),new import27.ElementRef(this._el_4),this.renderer);
+    this._text_5 = this.renderer.createText((null as any),'',(null as any));
+      compView_2.create(this._Button_2_4.context,[([] as any[]).concat([
+        this._text_3,
+        this._el_4,
+        this._text_5
+      ]
+    )],(null as any));
+    this._text_6 = this.renderer.createText(this._el_0,'\n                ',(null as any));
+    var disposable_0:Function = this.renderer.listen(this._el_2,'click',this.eventHandler(this._handle_click_2_0.bind(this)));
+    this._expr_2 = import7.UNINITIALIZED;
+    this._expr_3 = import7.UNINITIALIZED;
+    this.init(([] as any[]).concat([this._el_0]),[
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._el_4,
+      this._text_5,
+      this._text_6
+    ]
+    ,[disposable_0],([] as any[]));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import38.Icon) && (4 === requestNodeIndex))) { return this._Icon_4_3.context; }
+    if (((token === import39.Button) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._Button_2_4.context; }
+    if (((token === import52.Col) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._Col_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    this._Col_0_3.detectChangesInternal(this,this._el_0,throwOnChange);
+    if (this._Button_2_4.detectChangesInternal(this,this._el_2,throwOnChange)) { this._appEl_2.componentView.markAsCheckOnce(); }
+    const currVal_1:any = 'thumbs-up';
+    this._Icon_4_3.check_name(currVal_1,throwOnChange,false);
+    this._Icon_4_3.detectChangesInternal(this,this._el_4,throwOnChange);
+    this.detectContentChildrenChanges(throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Button_2_4.context.ngAfterContentInit(); } }
+    const currVal_2:any = this._Icon_4_3.context._hidden;
+    if (import4.checkBinding(throwOnChange,this._expr_2,currVal_2)) {
+      this.renderer.setElementClass(this._el_4,'hide',currVal_2);
+      this._expr_2 = currVal_2;
+    }
+    const currVal_3:any = import4.interpolate(1,'\n                        ',this.parent.context.$implicit.like_count,'\n                    ');
+    if (import4.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
+      this.renderer.setText(this._text_5,currVal_3);
+      this._expr_3 = currVal_3;
+    }
+    this.detectViewChildrenChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._Icon_4_3.context.ngOnDestroy();
+  }
+  private _handle_click_2_0($event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    const pd_0:any = ((<any>this.parent.parent.context.like(this.parent.context.$implicit._id,this.parent.context.index)) !== false);
+    return (true && pd_0);
+  }
+}
+function viewFactory_ExploreDetail2(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import3.AppElement):import1.AppView<any> {
+  return new _View_ExploreDetail2(viewUtils,parentInjector,declarationEl);
+}
+class _View_ExploreDetail3 extends import1.AppView<any> {
+  _el_0:any;
+  _Col_0_3:import48.Wrapper_Col;
+  _text_1:any;
+  _el_2:any;
+  /*private*/ _appEl_2:import3.AppElement;
+  _Button_2_4:import17.Wrapper_Button;
+  _text_3:any;
+  _el_4:any;
+  _Icon_4_3:import21.Wrapper_Icon;
+  _text_5:any;
+  _text_6:any;
+  /*private*/ _expr_3:any;
+  /*private*/ _expr_4:any;
+  constructor(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import3.AppElement) {
+    super(_View_ExploreDetail3,renderType_ExploreDetail,import6.ViewType.EMBEDDED,viewUtils,parentInjector,declarationEl,import7.ChangeDetectorStatus.CheckAlways);
+  }
+  createInternal(rootSelector:string):import3.AppElement {
+    this._el_0 = this.renderer.createElement((null as any),'ion-col',(null as any));
+    this.renderer.setElementAttribute(this._el_0,'width-20','');
+    this._Col_0_3 = new import48.Wrapper_Col();
+    this._text_1 = this.renderer.createText(this._el_0,'\n                    ',(null as any));
+    this._el_2 = this.renderer.createElement(this._el_0,'button',(null as any));
+    this.renderer.setElementAttribute(this._el_2,'color','danger');
+    this.renderer.setElementAttribute(this._el_2,'ion-button','');
+    this.renderer.setElementAttribute(this._el_2,'type','button');
+    this._appEl_2 = new import3.AppElement(2,0,this,this._el_2);
+    var compView_2:any = import17.viewFactory_Button0(this.viewUtils,this.injector(2),this._appEl_2);
+    this._Button_2_4 = new import17.Wrapper_Button((null as any),'',this.parent.parent.parentInjector.get(import26.Config),new import27.ElementRef(this._el_2),this.renderer);
+    this._appEl_2.initComponent(this._Button_2_4.context,([] as any[]),compView_2);
+    this._text_3 = this.renderer.createText((null as any),'\n                    ',(null as any));
+    this._el_4 = this.renderer.createElement((null as any),'ion-icon',(null as any));
+    this.renderer.setElementAttribute(this._el_4,'name','thumbs-down');
+    this.renderer.setElementAttribute(this._el_4,'role','img');
+    this._Icon_4_3 = new import21.Wrapper_Icon(this.parent.parent.parentInjector.get(import26.Config),new import27.ElementRef(this._el_4),this.renderer);
+    this._text_5 = this.renderer.createText((null as any),'',(null as any));
+      compView_2.create(this._Button_2_4.context,[([] as any[]).concat([
+        this._text_3,
+        this._el_4,
+        this._text_5
+      ]
+    )],(null as any));
+    this._text_6 = this.renderer.createText(this._el_0,'\n                ',(null as any));
+    var disposable_0:Function = this.renderer.listen(this._el_2,'click',this.eventHandler(this._handle_click_2_0.bind(this)));
+    this._expr_3 = import7.UNINITIALIZED;
+    this._expr_4 = import7.UNINITIALIZED;
+    this.init(([] as any[]).concat([this._el_0]),[
+      this._el_0,
+      this._text_1,
+      this._el_2,
+      this._text_3,
+      this._el_4,
+      this._text_5,
+      this._text_6
+    ]
+    ,[disposable_0],([] as any[]));
+    return (null as any);
+  }
+  injectorGetInternal(token:any,requestNodeIndex:number,notFoundResult:any):any {
+    if (((token === import38.Icon) && (4 === requestNodeIndex))) { return this._Icon_4_3.context; }
+    if (((token === import39.Button) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 5)))) { return this._Button_2_4.context; }
+    if (((token === import52.Col) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 6)))) { return this._Col_0_3.context; }
+    return notFoundResult;
+  }
+  detectChangesInternal(throwOnChange:boolean):void {
+    this._Col_0_3.detectChangesInternal(this,this._el_0,throwOnChange);
+    const currVal_1:any = 'danger';
+    this._Button_2_4.check_color(currVal_1,throwOnChange,false);
+    if (this._Button_2_4.detectChangesInternal(this,this._el_2,throwOnChange)) { this._appEl_2.componentView.markAsCheckOnce(); }
+    const currVal_2:any = 'thumbs-down';
+    this._Icon_4_3.check_name(currVal_2,throwOnChange,false);
+    this._Icon_4_3.detectChangesInternal(this,this._el_4,throwOnChange);
+    this.detectContentChildrenChanges(throwOnChange);
+    if (!throwOnChange) { if ((this.numberOfChecks === 0)) { this._Button_2_4.context.ngAfterContentInit(); } }
+    const currVal_3:any = this._Icon_4_3.context._hidden;
+    if (import4.checkBinding(throwOnChange,this._expr_3,currVal_3)) {
+      this.renderer.setElementClass(this._el_4,'hide',currVal_3);
+      this._expr_3 = currVal_3;
+    }
+    const currVal_4:any = import4.interpolate(1,'\n                        ',this.parent.context.$implicit.like_count,'\n                    ');
+    if (import4.checkBinding(throwOnChange,this._expr_4,currVal_4)) {
+      this.renderer.setText(this._text_5,currVal_4);
+      this._expr_4 = currVal_4;
+    }
+    this.detectViewChildrenChanges(throwOnChange);
+  }
+  destroyInternal():void {
+    this._Icon_4_3.context.ngOnDestroy();
+  }
+  private _handle_click_2_0($event:any):boolean {
+    this.markPathToRootAsCheckOnce();
+    const pd_0:any = ((<any>this.parent.parent.context.unlike(this.parent.context.$implicit._id,this.parent.context.index)) !== false);
+    return (true && pd_0);
+  }
+}
+function viewFactory_ExploreDetail3(viewUtils:import4.ViewUtils,parentInjector:import5.Injector,declarationEl:import3.AppElement):import1.AppView<any> {
+  return new _View_ExploreDetail3(viewUtils,parentInjector,declarationEl);
 }

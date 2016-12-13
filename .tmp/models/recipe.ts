@@ -12,6 +12,8 @@ export class Recipe {
     public reviews: String[],
     public userImg: String,
     public like_count:Number,
-    public dateCreated: Date
+    public dateCreated: Date,
+    public likedByUser:Boolean,
+    public username: String
     ) { }
 }

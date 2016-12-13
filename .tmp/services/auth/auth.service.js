@@ -27,6 +27,7 @@ export var AuthService = (function () {
             _this.user = JSON.parse(profile);
             _this.getCurrentUser(_this.user.user_id).then(function (data) {
                 _this.myUser = data;
+                _this.storage.set('myUser', JSON.stringify(data));
             });
             _this.upsertUser(_this.user);
         }).catch(function (error) {
@@ -50,6 +51,7 @@ export var AuthService = (function () {
                 _this.user = profile;
                 _this.getCurrentUser(_this.user.user_id).then(function (data) {
                     _this.myUser = data;
+                    _this.storage.set('myUser', JSON.stringify(data));
                 });
             });
             _this.lock.hide();
@@ -74,6 +76,7 @@ export var AuthService = (function () {
         this.storage.remove('profile');
         this.storage.remove('id_token');
         this.idToken = null;
+        this.storage.remove('myUser');
         this.storage.remove('refresh_token');
         this.zoneImpl.run(function () { return _this.user = null; });
         // Unschedule the token refresh

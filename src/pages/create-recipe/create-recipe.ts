@@ -166,8 +166,10 @@ takePicture(){
       model.ingredients = this.ingredients;
       model.steps = this.steps;
       model.userId = this.user.user_id;
+      model.userImg = this.user.picture;
       model.dateCreated = new Date();
       model.like_count = 0;
+      model.username = this.user.nickname;
       console.log(model);
       if(isValid){  
         this.recipeService.saveRecipe(model,function(){

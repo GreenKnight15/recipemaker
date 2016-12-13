@@ -553,7 +553,7 @@ class _View_YourRecipes1 extends import1.AppView<any> {
         this._text_26
       ]
     )],(null as any));
-    this._text_27 = this.renderer.createText(this._el_18,'S\n                ',(null as any));
+    this._text_27 = this.renderer.createText(this._el_18,'\n                ',(null as any));
     this._text_28 = this.renderer.createText(this._el_16,'\n                ',(null as any));
     this._el_29 = this.renderer.createElement(this._el_16,'ion-col',(null as any));
     this._Col_29_3 = new import48.Wrapper_Col();

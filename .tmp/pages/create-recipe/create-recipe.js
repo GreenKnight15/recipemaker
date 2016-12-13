@@ -137,20 +137,25 @@ export var CreateRecipe = (function () {
         model.ingredients = this.ingredients;
         model.steps = this.steps;
         model.userId = this.user.user_id;
+        model.userImg = this.user.picture;
         model.dateCreated = new Date();
         model.like_count = 0;
+        model.username = this.user.nickname;
         console.log(model);
         if (isValid) {
             this.recipeService.saveRecipe(model, function () {
+                var _this = this;
                 //pop up saved
                 //clear fields
                 this.presentToast();
-                console.log('saved');
-                this.ingredients = [];
-                this.ingredientTxt = '';
-                this.stepTxt = '';
-                this.steps = [];
-                this.recipeForm = null;
+                setTimeout(function () {
+                    console.log('saved');
+                    _this.ingredients = [];
+                    _this.ingredientTxt = '';
+                    _this.stepTxt = '';
+                    _this.steps = [];
+                    _this.recipeForm = null;
+                }, 100);
             });
         }
     };
