@@ -204,11 +204,9 @@ app.get('/api/getLikedRecipes/:id', function (req, res) {
             console.log(err);
         }
         else {
-            var likedIds = JSON.parse(user).likes;
-            console.log(likedIds);
-
+            var likedIds = user;
             Recipe.find({
-                _id: {$in:likedIds}
+                Id: {$in:likedIds.likes}
              }).exec(function (err, recipes) {
                 // if there is an error retrieving, send the error. nothing after res.send(err) will execute
                 if (err) {
