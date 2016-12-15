@@ -34,12 +34,21 @@ export class ExploreDetail implements OnInit{
     userLikes;
     parsed;
 
+<<<<<<< HEAD
     constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController ) {   
          this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
             this.myUser = data;
+=======
+        this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
+>>>>>>> origin/master
             this.storage.set('myUser', JSON.stringify(data));
           });
-        this.myUser = this.auth.myUser;
+        this.storage.get("myUser").then((user) => {
+            var val = JSON.parse(user);
+            console.log(val);
+            this.myUser = val;
+            return profile;
+        });
         this.userLikes = this.myUser.likes;  
         console.log(this.userLikes);
         this.categoryId = this.navParams.get('categoryId');
