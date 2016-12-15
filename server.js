@@ -204,7 +204,7 @@ app.get('/api/getLikedRecipes/:id', function (req, res) {
             console.log(err);
         }
         else {
-            var likedIds = user.likes;
+            var likedIds = JSON.parse(user).likes;
             console.log(likedIds);
 
             Recipe.find({
