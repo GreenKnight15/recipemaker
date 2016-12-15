@@ -95,23 +95,23 @@ app.post('/api/recipe/like', function (req, res) {
         }
         else {
             console.log("Saving like for recipe " + recipeId);
-        }
-    });
-    User.update({
-        user_id: userId
-    }, {
-        $addToSet: {
-            likes: recipeId
-        }
-    }).exec(function (err, db_res) {
-        if (err) {
-            console.log(err);
-            return res.send(500, {
-                error: err
+            User.update({
+                user_id: userId
+            }, {
+                $addToSet: {
+                    likes: recipeId
+                }
+            }).exec(function (err, db_res) {
+                if (err) {
+                    console.log(err);
+                    return res.send(500, {
+                        error: err
+                    });
+                }
+                else {
+                    console.log("Saving like for:User " + userId);
+                }
             });
-        }
-        else {
-            console.log("Saving like for:User " + userId);
         }
     });
 })
@@ -132,26 +132,26 @@ app.post('/api/recipe/unlike', function (req, res) {
                 });
             }
             else {
-                console.log("Saving like for recipe " + recipeId);
-            }
-        })
-        User.update({
-            user_id: userId
-        }, {
-            $pull: {
-                likes: recipeId
-            }
-        }).exec(function (err, db_res) {
-            if (err) {
-                console.log(err);
-                return res.send(500, {
-                    error: err
+                console.log("Saving unlike for recipe " + recipeId);
+                User.update({
+                    user_id: userId
+                }, {
+                    $pull: {
+                        likes: recipeId
+                    }
+                }).exec(function (err, db_res) {
+                    if (err) {
+                        console.log(err);
+                        return res.send(500, {
+                            error: err
+                        });
+                    }
+                    else {
+                        console.log("Saving unlike for:User " + userId);
+                    }
                 });
             }
-            else {
-                console.log("Saving like for:User " + userId);
-            }
-        });
+        })
     })
     // Get user by user id
 app.get('/api/getuser/:id', function (req, res) {
