@@ -80,7 +80,6 @@ app.post('/api/recipe', function (req, res) {
 app.post('/api/recipe/like', function (req, res) {
     var recipeId = req.body.RecipeId;
     var userId = req.body.UserId;
-    console.log("Saving like for:User " + userId + " and recipe " + recipeId);
     Recipe.findOneAndUpdate({
         _id: recipeId
     }, {
@@ -93,6 +92,9 @@ app.post('/api/recipe/like', function (req, res) {
             return res.send(500, {
                 error: err
             });
+        }
+        else {
+            console.log("Saving like for recipe " + recipeId);
         }
     });
     User.update({
@@ -108,12 +110,14 @@ app.post('/api/recipe/like', function (req, res) {
                 error: err
             });
         }
+        else {
+            console.log("Saving like for:User " + userId);
+        }
     });
 })
 app.post('/api/recipe/unlike', function (req, res) {
         var recipeId = req.body.RecipeId;
         var userId = req.body.UserId;
-        console.log("Saving unlike for:User " + userId + " and recipe " + recipeId);
         Recipe.findOneAndUpdate({
             _id: recipeId
         }, {
@@ -126,6 +130,9 @@ app.post('/api/recipe/unlike', function (req, res) {
                 return res.send(500, {
                     error: err
                 });
+            }
+            else {
+                console.log("Saving like for recipe " + recipeId);
             }
         })
         User.update({
@@ -140,6 +147,9 @@ app.post('/api/recipe/unlike', function (req, res) {
                 return res.send(500, {
                     error: err
                 });
+            }
+            else {
+                console.log("Saving like for:User " + userId);
             }
         });
     })

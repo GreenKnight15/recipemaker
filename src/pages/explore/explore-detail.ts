@@ -43,11 +43,15 @@ export class ExploreDetail implements OnInit{
         this.page = 0;
         this.perPage = 10;
 
-        this.myUser = this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
-            this.myUser = data;
+        this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
             this.storage.set('myUser', JSON.stringify(data));
           });
-        //this.myUser = this.auth.myUser;
+        this.storage.get("myUser").then((user) => {
+            var val = JSON.parse(user);
+            console.log(val);
+            this.myUser = val;
+            return profile;
+        });
         this.userLikes = this.myUser.likes;  
          
         this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
