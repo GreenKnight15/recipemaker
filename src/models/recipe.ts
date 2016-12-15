@@ -13,7 +13,7 @@ export class Recipe {
     public userImg: String,
     public like_count:Number,
     public dateCreated: Date,
-    public likedByUser:Boolean,
+    public likedByUser:Number,
     public username: String
     ) { }
 }

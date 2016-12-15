@@ -388,20 +388,23 @@ var _View_ExploreDetail1 = (function (_super) {
         this._text_7 = this.renderer.createText(this._el_6, '\n                    ', null);
         this._el_8 = this.renderer.createElement(this._el_6, 'h1', null);
         this._text_9 = this.renderer.createText(this._el_8, '', null);
-        this._text_10 = this.renderer.createText(this._el_6, '\n                ', null);
-        this._text_11 = this.renderer.createText(this._el_4, ' \n                ', null);
-        this._anchor_12 = this.renderer.createTemplateAnchor(this._el_4, null);
-        this._appEl_12 = new import3.AppElement(12, 4, this, this._anchor_12);
-        this._TemplateRef_12_5 = new import36.TemplateRef_(this._appEl_12, viewFactory_ExploreDetail2);
-        this._NgIf_12_6 = new import49.Wrapper_NgIf(this._appEl_12.vcRef, this._TemplateRef_12_5);
-        this._text_13 = this.renderer.createText(this._el_4, '\n                ', null);
-        this._anchor_14 = this.renderer.createTemplateAnchor(this._el_4, null);
-        this._appEl_14 = new import3.AppElement(14, 4, this, this._anchor_14);
-        this._TemplateRef_14_5 = new import36.TemplateRef_(this._appEl_14, viewFactory_ExploreDetail3);
-        this._NgIf_14_6 = new import49.Wrapper_NgIf(this._appEl_14.vcRef, this._TemplateRef_14_5);
-        this._text_15 = this.renderer.createText(this._el_4, '\n            ', null);
-        this._text_16 = this.renderer.createText(this._el_2, '\n            ', null);
-        this._text_17 = this.renderer.createText(null, '\n        ', null);
+        this._text_10 = this.renderer.createText(this._el_6, '\n                    ', null);
+        this._el_11 = this.renderer.createElement(this._el_6, 'p', null);
+        this._text_12 = this.renderer.createText(this._el_11, '', null);
+        this._text_13 = this.renderer.createText(this._el_6, '\n                ', null);
+        this._text_14 = this.renderer.createText(this._el_4, ' \n                ', null);
+        this._anchor_15 = this.renderer.createTemplateAnchor(this._el_4, null);
+        this._appEl_15 = new import3.AppElement(15, 4, this, this._anchor_15);
+        this._TemplateRef_15_5 = new import36.TemplateRef_(this._appEl_15, viewFactory_ExploreDetail2);
+        this._NgIf_15_6 = new import49.Wrapper_NgIf(this._appEl_15.vcRef, this._TemplateRef_15_5);
+        this._text_16 = this.renderer.createText(this._el_4, '\n                ', null);
+        this._anchor_17 = this.renderer.createTemplateAnchor(this._el_4, null);
+        this._appEl_17 = new import3.AppElement(17, 4, this, this._anchor_17);
+        this._TemplateRef_17_5 = new import36.TemplateRef_(this._appEl_17, viewFactory_ExploreDetail3);
+        this._NgIf_17_6 = new import49.Wrapper_NgIf(this._appEl_17.vcRef, this._TemplateRef_17_5);
+        this._text_18 = this.renderer.createText(this._el_4, '\n            ', null);
+        this._text_19 = this.renderer.createText(this._el_2, '\n            ', null);
+        this._text_20 = this.renderer.createText(null, '\n        ', null);
         this._query_Label_0_0.reset([]);
         this._Item_0_4.context.contentLabel = this._query_Label_0_0.first;
         compView_0.create(this._Item_0_4.context, [
@@ -410,13 +413,14 @@ var _View_ExploreDetail1 = (function (_super) {
             [].concat([
                 this._text_1,
                 this._el_2,
-                this._text_17
+                this._text_20
             ]),
             [],
             []
         ], null);
         var disposable_0 = this.renderer.listen(this._el_6, 'click', this.eventHandler(this._handle_click_6_0.bind(this)));
         this._expr_1 = import7.UNINITIALIZED;
+        this._expr_2 = import7.UNINITIALIZED;
         this.init([].concat([this._el_0]), [
             this._el_0,
             this._text_1,
@@ -429,42 +433,45 @@ var _View_ExploreDetail1 = (function (_super) {
             this._el_8,
             this._text_9,
             this._text_10,
-            this._text_11,
-            this._anchor_12,
+            this._el_11,
+            this._text_12,
             this._text_13,
-            this._anchor_14,
-            this._text_15,
+            this._text_14,
+            this._anchor_15,
             this._text_16,
-            this._text_17
+            this._anchor_17,
+            this._text_18,
+            this._text_19,
+            this._text_20
         ], [disposable_0], []);
         return null;
     };
     _View_ExploreDetail1.prototype.injectorGetInternal = function (token, requestNodeIndex, notFoundResult) {
-        if (((token === import52.Col) && ((6 <= requestNodeIndex) && (requestNodeIndex <= 10)))) {
+        if (((token === import52.Col) && ((6 <= requestNodeIndex) && (requestNodeIndex <= 13)))) {
             return this._Col_6_3.context;
         }
-        if (((token === import36.TemplateRef) && (12 === requestNodeIndex))) {
-            return this._TemplateRef_12_5;
+        if (((token === import36.TemplateRef) && (15 === requestNodeIndex))) {
+            return this._TemplateRef_15_5;
         }
-        if (((token === import53.NgIf) && (12 === requestNodeIndex))) {
-            return this._NgIf_12_6.context;
+        if (((token === import53.NgIf) && (15 === requestNodeIndex))) {
+            return this._NgIf_15_6.context;
         }
-        if (((token === import36.TemplateRef) && (14 === requestNodeIndex))) {
-            return this._TemplateRef_14_5;
+        if (((token === import36.TemplateRef) && (17 === requestNodeIndex))) {
+            return this._TemplateRef_17_5;
         }
-        if (((token === import53.NgIf) && (14 === requestNodeIndex))) {
-            return this._NgIf_14_6.context;
+        if (((token === import53.NgIf) && (17 === requestNodeIndex))) {
+            return this._NgIf_17_6.context;
         }
-        if (((token === import52.Row) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 15)))) {
+        if (((token === import52.Row) && ((4 <= requestNodeIndex) && (requestNodeIndex <= 18)))) {
             return this._Row_4_3.context;
         }
-        if (((token === import52.Grid) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 16)))) {
+        if (((token === import52.Grid) && ((2 <= requestNodeIndex) && (requestNodeIndex <= 19)))) {
             return this._Grid_2_3.context;
         }
-        if (((token === import54.Item) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 17)))) {
+        if (((token === import54.Item) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 20)))) {
             return this._Item_0_4.context;
         }
-        if (((token === import54.ItemContent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 17)))) {
+        if (((token === import54.ItemContent) && ((0 <= requestNodeIndex) && (requestNodeIndex <= 20)))) {
             return this._ItemContent_0_5.context;
         }
         return notFoundResult;
@@ -477,12 +484,12 @@ var _View_ExploreDetail1 = (function (_super) {
         this._Grid_2_3.detectChangesInternal(this, this._el_2, throwOnChange);
         this._Row_4_3.detectChangesInternal(this, this._el_4, throwOnChange);
         this._Col_6_3.detectChangesInternal(this, this._el_6, throwOnChange);
-        var currVal_2 = !this.context.$implicit.likedByUser;
-        this._NgIf_12_6.check_ngIf(currVal_2, throwOnChange, false);
-        this._NgIf_12_6.detectChangesInternal(this, this._anchor_12, throwOnChange);
-        var currVal_3 = this.context.$implicit.likedByUser;
-        this._NgIf_14_6.check_ngIf(currVal_3, throwOnChange, false);
-        this._NgIf_14_6.detectChangesInternal(this, this._anchor_14, throwOnChange);
+        var currVal_3 = !this.context.$implicit.likedByUser;
+        this._NgIf_15_6.check_ngIf(currVal_3, throwOnChange, false);
+        this._NgIf_15_6.detectChangesInternal(this, this._anchor_15, throwOnChange);
+        var currVal_4 = this.context.$implicit.likedByUser;
+        this._NgIf_17_6.check_ngIf(currVal_4, throwOnChange, false);
+        this._NgIf_17_6.detectChangesInternal(this, this._anchor_17, throwOnChange);
         this.detectContentChildrenChanges(throwOnChange);
         if (!throwOnChange) {
             if (this._query_Button_0_1.dirty) {
@@ -503,6 +510,11 @@ var _View_ExploreDetail1 = (function (_super) {
         if (import4.checkBinding(throwOnChange, this._expr_1, currVal_1)) {
             this.renderer.setText(this._text_9, currVal_1);
             this._expr_1 = currVal_1;
+        }
+        var currVal_2 = import4.interpolate(1, '', this.context.$implicit.likedByUser, '');
+        if (import4.checkBinding(throwOnChange, this._expr_2, currVal_2)) {
+            this.renderer.setText(this._text_12, currVal_2);
+            this._expr_2 = currVal_2;
         }
         this.detectViewChildrenChanges(throwOnChange);
     };

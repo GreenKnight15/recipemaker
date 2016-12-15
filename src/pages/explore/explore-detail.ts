@@ -1,7 +1,7 @@
 import { Component,OnInit  } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
 import { RecipeService } from '../../services/recipe-service';
 import { Recipe } from '../../models/recipe';
@@ -29,39 +29,40 @@ export class ExploreDetail implements OnInit{
     categoryId;
     categoryName:String;
     storage: Storage = new Storage();
-
-    constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController ) {        
-    }
-    
-    public recipes = []; 
+    recipes = []; 
     myUser:User;
     userLikes;
-    
-     ngOnInit(){
-        this.categoryId = this.navParams.get('categoryId');
-        this.categoryName = Catagories[this.categoryId].name;
-        this.page = 0;
-        this.perPage = 10;
+    parsed;
 
-        this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
+    constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController ) {   
+         this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
             this.myUser = data;
             this.storage.set('myUser', JSON.stringify(data));
           });
         this.myUser = this.auth.myUser;
         this.userLikes = this.myUser.likes;  
+        console.log(this.userLikes);
+        this.categoryId = this.navParams.get('categoryId');
+        this.categoryName = Catagories[this.categoryId].name;
+        this.page = 0;
+        this.perPage = 10;
          
         this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
-        .then((data) => { 
-        setTimeout( () => {  
-            this.recipes = this.compareUserLikesToList(this.parseRecipesObject(data),this.userLikes);
-        },100)
-      })
+            .then((data) => { 
+                var parsed = this.parseRecipesObject(data);
+                this.recipes = this.compareUserLikesToList(parsed,this.userLikes);
+                console.log(this.recipes);
+ 
+            })
+        }
+    
+     ngOnInit(){
+
+
      }
     
     ionViewDidLoad() {
 
-
-        this.init();
     }
     
     parseRecipesObject(data){
@@ -74,19 +75,18 @@ export class ExploreDetail implements OnInit{
         return array;
     }
     
-    init(){
-    }
-    
     compareUserLikesToList(recipePageData,userLikes ){
         for(var i=0; i< recipePageData.length; i++){
             for(var j=0; j< userLikes.length; j++){
                 if(recipePageData[i]._id == userLikes[j]){
                     recipePageData[i].likedByUser = true;
+                    break;
                 }else{
                     recipePageData[i].likedByUser = false;
                 }
             }
         }
+        console.log(recipePageData)
         return recipePageData;
     }
     

@@ -9,6 +9,7 @@ import { RecipeDetails } from '../recipe-details/recipe-details';
 import { Storage } from '@ionic/storage';
 export var ExploreDetail = (function () {
     function ExploreDetail(navCtrl, recipeService, auth, navParams, modalCtrl) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.recipeService = recipeService;
         this.auth = auth;
@@ -16,28 +17,27 @@ export var ExploreDetail = (function () {
         this.modalCtrl = modalCtrl;
         this.storage = new Storage();
         this.recipes = [];
-    }
-    ExploreDetail.prototype.ngOnInit = function () {
-        var _this = this;
-        this.categoryId = this.navParams.get('categoryId');
-        this.categoryName = Catagories[this.categoryId].name;
-        this.page = 0;
-        this.perPage = 10;
         this.auth.getCurrentUser(this.auth.user.user_id).then(function (data) {
             _this.myUser = data;
             _this.storage.set('myUser', JSON.stringify(data));
         });
         this.myUser = this.auth.myUser;
         this.userLikes = this.myUser.likes;
+        console.log(this.userLikes);
+        this.categoryId = this.navParams.get('categoryId');
+        this.categoryName = Catagories[this.categoryId].name;
+        this.page = 0;
+        this.perPage = 10;
         this.recipeService.lazySearchByCategory(this.categoryId, this.page, this.perPage)
             .then(function (data) {
-            setTimeout(function () {
-                _this.recipes = _this.compareUserLikesToList(_this.parseRecipesObject(data), _this.userLikes);
-            }, 100);
+            var parsed = _this.parseRecipesObject(data);
+            _this.recipes = _this.compareUserLikesToList(parsed, _this.userLikes);
+            console.log(_this.recipes);
         });
+    }
+    ExploreDetail.prototype.ngOnInit = function () {
     };
     ExploreDetail.prototype.ionViewDidLoad = function () {
-        this.init();
     };
     ExploreDetail.prototype.parseRecipesObject = function (data) {
         var array = [];
@@ -48,19 +48,19 @@ export var ExploreDetail = (function () {
         }
         return array;
     };
-    ExploreDetail.prototype.init = function () {
-    };
     ExploreDetail.prototype.compareUserLikesToList = function (recipePageData, userLikes) {
         for (var i = 0; i < recipePageData.length; i++) {
             for (var j = 0; j < userLikes.length; j++) {
                 if (recipePageData[i]._id == userLikes[j]) {
                     recipePageData[i].likedByUser = true;
+                    break;
                 }
                 else {
                     recipePageData[i].likedByUser = false;
                 }
             }
         }
+        console.log(recipePageData);
         return recipePageData;
     };
     ExploreDetail.prototype.onScrollEnd = function () {
