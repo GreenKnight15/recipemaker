@@ -34,36 +34,32 @@ export class ExploreDetail implements OnInit{
     userLikes;
     parsed;
 
-<<<<<<< HEAD
     constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController ) {   
-         this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
-            this.myUser = data;
-=======
-        this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
->>>>>>> origin/master
-            this.storage.set('myUser', JSON.stringify(data));
-          });
-        this.storage.get("myUser").then((user) => {
-            var val = JSON.parse(user);
-            console.log(val);
-            this.myUser = val;
-            return profile;
-        });
+
+    this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
+        this.storage.set('myUser', JSON.stringify(data));
+    });
+    this.storage.get("myUser").then((user) => {
+        var val = JSON.parse(user);
+        console.log(val);
+        this.myUser = val;
         this.userLikes = this.myUser.likes;  
-        console.log(this.userLikes);
-        this.categoryId = this.navParams.get('categoryId');
-        this.categoryName = Catagories[this.categoryId].name;
-        this.page = 0;
-        this.perPage = 10;
+
+    });
+    console.log(this.userLikes);
+    this.categoryId = this.navParams.get('categoryId');
+    this.categoryName = Catagories[this.categoryId].name;
+    this.page = 0;
+    this.perPage = 10;
          
-        this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
-            .then((data) => { 
-                var parsed = this.parseRecipesObject(data);
-                this.recipes = this.compareUserLikesToList(parsed,this.userLikes);
-                console.log(this.recipes);
- 
-            })
-        }
+    this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
+        .then((data) => { 
+            var parsed = this.parseRecipesObject(data);
+            this.recipes = this.compareUserLikesToList(parsed,this.userLikes);
+            console.log(this.recipes);
+
+        })
+    }
     
      ngOnInit(){
 

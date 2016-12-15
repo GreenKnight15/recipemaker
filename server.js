@@ -189,6 +189,38 @@ app.get('/api/getRecipes/:id', function (req, res) {
         }
     });
 });
+
+// Get liked recipes by user id
+app.get('/api/getLikedRecipes/:id', function (req, res) {
+    var id = req.param('id');
+    console.log("fetching recipes for user: " + id);
+    // use mongoose to get all reviews in the database
+    User.find({
+        user_id: id
+    , }).exec(function (err, user) {
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err)
+            console.log(err);
+        }
+        else {
+            var likedIds = Json.parse(user).likes;
+            Recipe.find({
+                _id: {$in:likedIds}
+             }).exec(function (err, recipes) {
+                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                if (err) {
+                    res.send(err)
+                    console.log(err);
+                }
+                else {
+                    res.json(recipes); // return all reviews in JSON format
+                }
+            });
+        }
+    });
+});
+
 // Get recipes by catagory id
 // Get recipes by user id
 app.get('/api/category/:id/:page/:perPage', function (req, res) {

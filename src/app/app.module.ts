@@ -12,6 +12,8 @@ import { Login } from '../pages/login/login';
 import { RecipeDetails } from '../pages/recipe-details/recipe-details';
 import { Explore } from '../pages/explore/explore';
 import { ExploreDetail } from '../pages/explore/explore-detail';
+import { LikedRecipes } from '../pages//your-recipes/liked-recipes'
+import { CreatedRecipes } from '../pages/your-recipes/created-recipes'
 
 //Models
 import { Meal } from '../pages/models/';
@@ -41,7 +43,9 @@ export function getAuthHttp(http) {
     Login,
     RecipeDetails,
     Explore,
-    ExploreDetail
+    ExploreDetail,
+    LikedRecipes,
+    CreatedRecipes
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -56,7 +60,9 @@ export function getAuthHttp(http) {
     Login,
     RecipeDetails,
     Explore,
-    ExploreDetail
+    ExploreDetail,
+    LikedRecipes,
+    CreatedRecipes
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, RecipeService,AuthService,
     {

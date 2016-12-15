@@ -28,6 +28,18 @@ export class RecipeService {
     });
   }
 
+  getUserLikedRecipes(id){
+    console.log('getUserLikedRecipes:'+id);
+    return new Promise(resolve => {
+      this.authHttp.get(this.url+'/api/getLikedRecipes/' + id)
+        .map(res => res.json())
+        .subscribe(data => {
+          console.log(data)
+          resolve(data);
+        });
+    });
+  }
+
   public saveRecipe(recipe:Recipe, callback){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
