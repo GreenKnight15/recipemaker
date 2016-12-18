@@ -24,6 +24,18 @@ export var RecipeService = (function () {
             });
         });
     };
+    RecipeService.prototype.getUserLikedRecipes = function (id) {
+        var _this = this;
+        console.log('getUserLikedRecipes:' + id);
+        return new Promise(function (resolve) {
+            _this.authHttp.get(_this.url + '/api/getLikedRecipes/' + id)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (data) {
+                console.log(data);
+                resolve(data);
+            });
+        });
+    };
     RecipeService.prototype.saveRecipe = function (recipe, callback) {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');

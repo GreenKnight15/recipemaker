@@ -3,7 +3,8 @@ import { NavController } from 'ionic-angular';
 import { RecipeService } from '../../services/recipe-service';
 import { AuthService } from '../..//services/auth/auth.service';
 import { ModalController } from 'ionic-angular';
-import { RecipeDetails } from '../recipe-details/recipe-details';
+import { LikedRecipes } from '../your-recipes/liked-recipes';
+import { CreatedRecipes } from '../your-recipes/created-recipes';
 /*
   Generated class for the YourRecipes page.
 
@@ -16,22 +17,17 @@ export var YourRecipes = (function () {
         this.recipeService = recipeService;
         this.auth = auth;
         this.modalCtrl = modalCtrl;
+        this.tab1Root = CreatedRecipes;
+        this.tab2Root = LikedRecipes;
     }
+    YourRecipes.prototype.switchTabs = function () {
+        this.navCtrl.parent.select(2);
+    };
     YourRecipes.prototype.ionViewDidLoad = function () {
     };
     YourRecipes.prototype.ngOnInit = function () {
-        var _this = this;
-        this.user = this.auth.user;
-        this.recipeService.getUserRecipes(this.user.user_id)
-            .then(function (data) {
-            _this.userRecipes = data;
-        });
     };
     ;
-    YourRecipes.prototype.recipeSelected = function (recipe) {
-        var modal = this.modalCtrl.create(RecipeDetails, { item: recipe });
-        modal.present();
-    };
     YourRecipes.decorators = [
         { type: Component, args: [{
                     selector: 'page-your-recipes',

@@ -18,11 +18,14 @@ export var ExploreDetail = (function () {
         this.storage = new Storage();
         this.recipes = [];
         this.auth.getCurrentUser(this.auth.user.user_id).then(function (data) {
-            _this.myUser = data;
             _this.storage.set('myUser', JSON.stringify(data));
         });
-        this.myUser = this.auth.myUser;
-        this.userLikes = this.myUser.likes;
+        this.storage.get("myUser").then(function (user) {
+            var val = JSON.parse(user);
+            console.log(val);
+            _this.myUser = val;
+            _this.userLikes = _this.myUser.likes;
+        });
         console.log(this.userLikes);
         this.categoryId = this.navParams.get('categoryId');
         this.categoryName = Catagories[this.categoryId].name;

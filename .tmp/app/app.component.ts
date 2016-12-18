@@ -13,6 +13,9 @@ import { Login } from '../pages/login/login';
 import { RecipeDetails } from '../pages/recipe-details/recipe-details';
 import { Explore } from '../pages/explore/explore';
 import { CreateRecipe } from '../pages/create-recipe/create-recipe';
+import { LikedRecipes } from '../pages/your-recipes/liked-recipes'
+import { CreatedRecipes } from '../pages/your-recipes/created-recipes'
+
 import { YourRecipes } from '../pages/your-recipes/your-recipes';
 import { AuthService } from '../services/auth/auth.service';
 

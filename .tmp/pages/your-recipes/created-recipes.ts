@@ -7,8 +7,6 @@ import {AuthService} from '../..//services/auth/auth.service';
 import { Recipe } from '../../models/recipe';
 import { ModalController } from 'ionic-angular';
 import { RecipeDetails } from '../recipe-details/recipe-details'
-import { LikedRecipes } from '../your-recipes/liked-recipes'
-import { CreatedRecipes } from '../your-recipes/created-recipes'
 
 /*
   Generated class for the YourRecipes page.
@@ -17,34 +15,33 @@ import { CreatedRecipes } from '../your-recipes/created-recipes'
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-your-recipes',
-  templateUrl: 'your-recipes.html'
+  selector: 'page-created-recipes',
+  templateUrl: 'created-recipes.html'
 })
+export class CreatedRecipes implements OnInit{
 
-export class YourRecipes implements OnInit{
-
-
-    tab1Root = CreatedRecipes;
-    tab2Root = LikedRecipes;
+    user:User;
+    r:Recipe;
+    userRecipes; 
     
-  constructor(public navCtrl: NavController,private recipeService: RecipeService, public auth: AuthService,public modalCtrl: ModalController) {
-
-  }
-    
-    switchTabs() {
-      this.navCtrl.parent.select(2);
-    }
+  constructor(public navCtrl: NavController,private recipeService: RecipeService, public auth: AuthService,public modalCtrl: ModalController) {}
     
   ionViewDidLoad() {
-
   }
     
-
     ngOnInit(){
-
+      this.user = this.auth.user
+      this.recipeService.getUserRecipes(this.user.user_id)
+        .then((data) => { 
+          this.userRecipes = data;
+      })
     };
     
-
+    recipeSelected(recipe:Recipe){
+        let modal = this.modalCtrl.create(RecipeDetails,{item:recipe});
+        modal.present();
+        
+    }
     
     
     
