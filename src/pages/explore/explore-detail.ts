@@ -1,5 +1,5 @@
 import { Component,OnInit  } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import 'rxjs/add/operator/map';
@@ -33,9 +33,11 @@ export class ExploreDetail implements OnInit{
     myUser:User;
     userLikes;
     parsed;
+    colCount;
 
-    constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController ) {   
+    constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController,platform: Platform ) {   
 
+  this.platform = platform;
     this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
         this.storage.set('myUser', JSON.stringify(data));
     });
@@ -51,6 +53,12 @@ export class ExploreDetail implements OnInit{
     this.categoryName = Catagories[this.categoryId].name;
     this.page = 0;
     this.perPage = 10;
+    if(this.platform.is("Web")){
+        this.colCount = 3;
+    }else{
+        this.colCount = 2;
+    }
+    
          
     this.recipeService.lazySearchByCategory(this.categoryId ,this.page,this.perPage)
         .then((data) => { 
@@ -91,8 +99,26 @@ export class ExploreDetail implements OnInit{
                 }
             }
         }
-        console.log(recipePageData)
-        return recipePageData;
+        let rowCount =0;
+        var colArray = [];
+
+        for(var i=0; i< recipePageData.length; i+=this.colCount){
+            colArray[rowCount] = Array(this.colCount);
+            if(this.recipePageData[i]){
+                colArray[rowCount][0] = this.recipePageData[i]
+            }
+            if(this.recipePageData[i+1]){
+                colArray[rowCount][1] = this.recipePageData[i+1]
+            }
+            if(this.colCount == 3 && this.recipePageData[i+2]){
+                colArray[rowCount][2]= this.recipePageData[i+2]
+            }
+            rowCount++;
+        }
+
+        console.log(this.colCount);
+        //return recipePageData;
+        return colArray;
     }
     
     
@@ -103,25 +129,25 @@ export class ExploreDetail implements OnInit{
       })
     } 
     
-    like(id,i){
-        console.log(id,i);
+    like(id,i1,i2){
+        console.log(id,i1,i2);
         this.recipeService.likeRecipe(id,this.myUser.user_id);
          setTimeout( () => {
              // update your data
-             this.recipes[i].like_count++;
-             this.recipes[i].likedByUser = true;
+             this.recipes[i1][i2].like_count++;
+             this.recipes[i1][i2].likedByUser = true;
 
          },100)
          console.log(this.recipes[i]);
     }
     
-    unlike(id,i){
-        console.log(id,i);
+    unlike(id,i1,i2){
+        console.log(id,i1,i2);
         this.recipeService.unlikeRecipe(id,this.myUser.user_id);
          setTimeout( () => {
              // update your data
-             this.recipes[i].like_count--;
-             this.recipes[i].likedByUser = false;
+             this.recipes[i1][i2].like_count--;
+             this.recipes[i1][i2].likedByUser = false;
 
          },100)
     }
