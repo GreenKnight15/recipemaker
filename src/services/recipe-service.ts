@@ -17,7 +17,7 @@ export class RecipeService {
     this.data = null ;
   }
  
-  getUserRecipes(id){
+  public getUserRecipes(id){
       console.log('getUserRecipes:'+id);
     return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/getRecipes/' + id)
@@ -29,7 +29,7 @@ export class RecipeService {
     });
   }
 
-  getUserLikedRecipes(id){
+  public getUserLikedRecipes(id){
     console.log('getUserLikedRecipes:'+id);
     return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/getLikedRecipes/' + id)
@@ -79,7 +79,6 @@ export class RecipeService {
   }
  
   deleteRecipe(id){
- 
     this.authHttp.delete(this.url+'/api/recipe/' + id).subscribe((res) => {
       console.log(res.json());
     },error => console.log(error));    
@@ -102,7 +101,7 @@ export class RecipeService {
      );
   }
  
-  getUserGroceryLists(id){
+  public getUserGroceryLists(id){
     console.log('getUserGroceryLists:'+id);
     return new Promise(resolve => {
       this.authHttp.get(this.url+'/api/getGroceryLists/' + id)
@@ -113,5 +112,13 @@ export class RecipeService {
         });
     });
   }
+    
+ public deleteGroceryList(list){
+        this.authHttp.delete(this.url+'/api/grocery/' + list._id ).subscribe((res) => {
+          console.log(res.json());
+        },error => console.log(error));    
+ 
+ }
+
     
 }

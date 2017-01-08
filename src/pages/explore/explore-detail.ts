@@ -35,9 +35,9 @@ export class ExploreDetail implements OnInit{
     parsed;
     colCount;
 
-    constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController,platform: Platform ) {   
+    constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService, public navParams: NavParams,public modalCtrl: ModalController,public platform: Platform ) {   
 
-  this.platform = platform;
+    this.platform = platform;
     this.auth.getCurrentUser(this.auth.user.user_id).then((data:User) => { 
         this.storage.set('myUser', JSON.stringify(data));
     });
@@ -104,14 +104,14 @@ export class ExploreDetail implements OnInit{
 
         for(var i=0; i< recipePageData.length; i+=this.colCount){
             colArray[rowCount] = Array(this.colCount);
-            if(this.recipePageData[i]){
-                colArray[rowCount][0] = this.recipePageData[i]
+            if(recipePageData[i]){
+                colArray[rowCount][0] = recipePageData[i]
             }
-            if(this.recipePageData[i+1]){
-                colArray[rowCount][1] = this.recipePageData[i+1]
+            if(recipePageData[i+1]){
+                colArray[rowCount][1] = recipePageData[i+1]
             }
-            if(this.colCount == 3 && this.recipePageData[i+2]){
-                colArray[rowCount][2]= this.recipePageData[i+2]
+            if(this.colCount == 3 && recipePageData[i+2]){
+                colArray[rowCount][2]= recipePageData[i+2]
             }
             rowCount++;
         }
@@ -138,7 +138,7 @@ export class ExploreDetail implements OnInit{
              this.recipes[i1][i2].likedByUser = true;
 
          },100)
-         console.log(this.recipes[i]);
+         console.log(this.recipes[i1],this.recipes[i2]);
     }
     
     unlike(id,i1,i2){

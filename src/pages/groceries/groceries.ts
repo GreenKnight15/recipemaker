@@ -18,7 +18,7 @@ import { User } from '../../models/user';
 export class Groceries implements OnInit{
     
   user:User;
-  userGroceryLists:GroceryList[];
+  userGroceryLists:any;
         
   constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService ) {}
     
@@ -41,6 +41,7 @@ export class Groceries implements OnInit{
     
     deleteList(i){
         this.userGroceryLists.splice(i,1);
+        this.recipeService.deleteGroceryList(this.userGroceryLists[i])
     }
     
 }

@@ -294,6 +294,14 @@ app.get('/api/getGroceryLists/:id', function (req, res) {
     });
 });
 
+    app.delete('/api/reviews/:id', function(req, res) {
+        GroceryList.remove({
+            _id : req.param('id')
+        }, function(err, review) {
+ 
+        });
+    });
+
 
 //    // delete a review
 //    app.delete('/api/reviews/:review_id', function(req, res) {
