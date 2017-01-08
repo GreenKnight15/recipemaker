@@ -2,6 +2,7 @@
 require('./Models/user');
 require('./Models/review');
 require('./Models/recipe');
+require('./Models/groceryList');
 var express = require('express');
 var app = express(); // create our app w/ express
 var mongoose = require('mongoose'); // mongoose for mongodb
@@ -35,6 +36,8 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Review = mongoose.model('Review');
 var Recipe = mongoose.model('Recipe');
+var GroceryList = mongoose.model('GroceryList');
+
 // Routes
 app.post('/api/user', function (req, res) {
     console.log('saving user:' + req.body.user_id)
@@ -244,6 +247,35 @@ app.get('/api/category/:id/:page/:perPage', function (req, res) {
         }
     });
 });
+
+app.post('/api/grocery', function (req, res) {
+    console.log('saving grocery list:' + req.body)
+    var query;
+    var list = req.body;
+    if (req.body._id != null) {
+        query = {
+            Id: req.body._id
+        };
+        GroceryList.findOneAndUpdate(query, list, {
+            upsert: true
+        }, function (err, list) {
+            if (err) return res.send(500, {
+                error: err
+            });
+        });
+    }
+    else {
+        GroceryList.create(list, function (err, list) {
+            if (err) {
+                return res.send(500, {
+                    error: err
+                });
+            }
+        });
+    }
+});
+
+
 //    // delete a review
 //    app.delete('/api/reviews/:review_id', function(req, res) {
 //        Review.remove({

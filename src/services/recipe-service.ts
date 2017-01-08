@@ -4,7 +4,8 @@ import 'rxjs/add/operator/map';
 import {AuthHttp} from 'angular2-jwt';
 import {AuthService} from './auth/auth.service';
 import { Recipe } from '../models/recipe';
- import { URL } from '../app/url';
+import { URL } from '../app/url';
+import { GroceryList } from '../models/groceryList';
 
 @Injectable()
 export class RecipeService {
@@ -76,8 +77,6 @@ export class RecipeService {
         });
     });
   }
-    
-    
  
   deleteRecipe(id){
  
@@ -85,6 +84,22 @@ export class RecipeService {
       console.log(res.json());
     },error => console.log(error));    
  
+  }
+
+  public saveGroceryList(recipe:Recipe,callback){
+    let list:GroceryList = {
+        title:recipe.title, 
+        ingredients:recipe.ingredients,
+        recipeId:recipe.Id,
+        user_id:recipe.userId
+    };
+      
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.authHttp.post(this.url+'/api/grocery', JSON.stringify(list), {headers: headers})
+      .subscribe(res => {
+      }, error => console.log(error)
+     );
   }
  
     

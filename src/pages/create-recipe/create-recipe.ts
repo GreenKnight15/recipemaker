@@ -10,7 +10,7 @@ import { Meal } from '../../models/meal';
 import { Meals } from '../../models/meals';
 import { Featured } from '../featured/featured';
 import { AuthService} from '../../services/auth/auth.service';
-import { Catagory } from '../../models/catagory';
+//import { Catagory } from '../../models/catagory';
 import { Catagories } from '../../models/catagories';
 import { User } from '../../models/user';
 import {Camera, ImagePicker, File,FileChooser } from 'ionic-native';

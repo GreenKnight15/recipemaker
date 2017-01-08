@@ -34,4 +34,10 @@ export class RecipeDetails implements OnInit{
        this.viewCtrl.dismiss();
      }
     
+    createGroceryList(recipe){
+        this.recipeService.saveGroceryList(recipe,function(){
+            console.log("saved list");
+        })
+    }
+    
 }
