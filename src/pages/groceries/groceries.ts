@@ -39,9 +39,10 @@ export class Groceries implements OnInit{
         this.navCtrl.push(GroceryListDetails,{item:selected})
     }
     
-    deleteList(i){
+    deleteList(i,id){
+        console.log(id);
         this.userGroceryLists.splice(i,1);
-        this.recipeService.deleteGroceryList(this.userGroceryLists[i])
+        this.recipeService.deleteGroceryList(id)
     }
     
 }

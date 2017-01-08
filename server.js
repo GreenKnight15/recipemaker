@@ -296,7 +296,7 @@ app.get('/api/getGroceryLists/:id', function (req, res) {
 
     app.delete('/api/reviews/:id', function(req, res) {
         GroceryList.remove({
-            _id : req.param('id')
+            Id : req.param('id')
         }, function(err, review) {
  
         });

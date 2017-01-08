@@ -113,8 +113,8 @@ export class RecipeService {
     });
   }
     
- public deleteGroceryList(list){
-        this.authHttp.delete(this.url+'/api/grocery/' + list._id ).subscribe((res) => {
+ public deleteGroceryList(id){
+        this.authHttp.delete(this.url+'/api/grocery/' + id ).subscribe((res) => {
           console.log(res.json());
         },error => console.log(error));    
  
