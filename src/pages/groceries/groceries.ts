@@ -6,6 +6,7 @@ import { RecipeService } from '../../services/recipe-service';
 import { AuthService } from '../../services/auth/auth.service';
 import { GroceryList } from '../../models/groceryList'
 import { GroceryListDetails } from '../groceries/groceryListDetails';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'page-groceries',
@@ -16,26 +17,18 @@ import { GroceryListDetails } from '../groceries/groceryListDetails';
 @Injectable()
 export class Groceries implements OnInit{
     
-    testList1:GroceryList = {
-        Id:"qweqwe",
-        title:"TEST 1", 
-        ingredients:["1 Cup of Flour","3 Eggs"],
-        recipeId:"asdasdasd",
-        user_id:"asdasd"
-    };
-        testList2:GroceryList = {
-        Id:"qweqwe",
-        title:"TEST 2", 
-        ingredients:["1 Cup of Flour","3 Eggs"],
-        recipeId:"asdasdasd",
-        user_id:"asdasd"
-    };
-
-    userGroceryLists:GroceryList[] = [this.testList1, this.testList2];
+  user:User;
+  userGroceryLists:GroceryList[];
         
   constructor(public navCtrl: NavController, private recipeService: RecipeService,public auth: AuthService ) {}
     
     ngOnInit(){
+        this.user = this.auth.user;
+        this.recipeService.getUserGroceryLists(this.user.user_id)
+            .then((data) => { 
+              this.userGroceryLists = data;
+              console.log(data);
+          })
     }
 
     ionViewDidLoad() {

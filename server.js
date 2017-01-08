@@ -275,6 +275,25 @@ app.post('/api/grocery', function (req, res) {
     }
 });
 
+// Get grocery lists by user id
+app.get('/api/getGroceryLists/:id', function (req, res) {
+    var id = req.param('id');
+    console.log("fetching grocery lists for user: " + id);
+    // use mongoose to get all reviews in the database
+    GroceryList.find({
+        user_id: id
+    , }).exec(function (err, lists) {
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err) {
+            res.send(err)
+            console.log(err);
+        }
+        else {
+            res.json(lists); // return all grocery lists in JSON format
+        }
+    });
+});
+
 
 //    // delete a review
 //    app.delete('/api/reviews/:review_id', function(req, res) {

@@ -86,7 +86,7 @@ export class RecipeService {
  
   }
 
-  public saveGroceryList(recipe:Recipe,callback){
+  saveGroceryList(recipe:Recipe,callback){
     let list:GroceryList = {
         title:recipe.title, 
         ingredients:recipe.ingredients,
@@ -102,6 +102,16 @@ export class RecipeService {
      );
   }
  
-    
+  getUserGroceryLists(id){
+    console.log('getUserGroceryLists:'+id);
+    return new Promise(resolve => {
+      this.authHttp.get(this.url+'/api/getGroceryLists/' + id)
+        .map(res => res.json())
+        .subscribe(data => {
+          console.log(data)
+          resolve(data);
+        });
+    });
+  }
     
 }
