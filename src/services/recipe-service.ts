@@ -114,7 +114,7 @@ export class RecipeService {
   }
     
  public deleteGroceryList(id){
-        this.authHttp.delete(this.url+'/api/grocery/' + id ).subscribe((res) => {
+        this.authHttp.delete(this.url+'/api/deleteGroceryList/' + id ).subscribe((res) => {
           console.log(res.json());
         },error => console.log(error));    
  

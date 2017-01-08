@@ -294,7 +294,7 @@ app.get('/api/getGroceryLists/:id', function (req, res) {
     });
 });
 
-    app.delete('/api/grocery/:id', function(req, res) {
+    app.delete('/api/deleteGroceryList/:id', function(req, res) {
         GroceryList.remove({
             Id : req.param('id')
         }, function(err, review) {
